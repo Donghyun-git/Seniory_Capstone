@@ -1,0 +1,187 @@
+@charset "utf-8";
+@import "default.css";
+@import "animate.min.css";
+@import "fonts.css";
+@import "common.css";
+
+@font-face {
+    font-family: 'PyeongChangPeace-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+
+/* login */
+#login {display: table; width: 100%; height: 100%; position: relative;}
+#login-inner {display: table-cell; width: 100%; vertical-align: middle; padding-left: 60px; padding-right: 60px;}
+#login-title {text-align: center; padding-top: 240px; background: url('../img/login_ico.png')no-repeat center top / 240px auto;}
+#login-title h2 {font-family: 'PyeongChangPeace-Bold'; font-size: 36px; line-height: 1.0em;}
+#login-title p {font-size: 16px; margin-top: 5px; color: #444;}
+#login-form {margin-top: 40px;}
+.login-form__radio {}
+.login-form__radio {height: 30px; position: relative; text-align: center;}
+.login-form__radio:before {content: ''; display: block; width: 60px; height: 30px; background: #f5f5f5; border: solid 1px #eee; box-sizing: border-box; position: absolute; left: 50%; margin-left: -30px; border-radius: 15px;}
+.login-form__radio input[type="radio"] {display: none;}
+.login-form__radio input[type="radio"] + label {margin-left: 0; display: inline-block; height: 30px; line-height: 30px; color: #ccc; position: relative; z-index: 1; -webkit-transition: all 0.3s; transition: all 0.3s;}
+.login-form__radio input[type="radio"]:checked + label {color: #000;}
+.login-form__radio input[type="radio"]#rdo01 + label {padding-right: 35px;}
+.login-form__radio input[type="radio"]#rdo02 + label {padding-left: 35px;}
+.login-form__radio input[type="radio"] ~ .login-form__dots {display: block; width: 24px; height: 24px; background: #0db565; position: absolute; left: 50%; margin-left: -27px; top: 50%; margin-top: -12px; border-radius: 50%; -webkit-transition: all 0.3s; transition: all 0.3s;}
+.login-form__radio input[type="radio"]#rdo02:checked ~ .login-form__dots {margin-left: 3px;}
+.login-form__select {}
+.login-form__input {margin-top: 15px;}
+.login-form__input li {margin-bottom: 5px;}
+.login-form__input li:last-child {margin-bottom: 0;}
+.login-form__input li input[type="text"],
+.login-form__input li input[type="password"] {display: block; width: 100%;}
+.login-form__submit {margin-top: 15px;}
+.login-form__submit button {display: block; width: 100%; background: #0db565; color: #fff; height: 50px; line-height: 50px; font-size: 16px; font-weight: 500; border-radius: 4px;}
+.login-form__menu {text-align: center; margin-top: 20px;}
+.login-form__menu li {display: inline-block; position: relative; padding-right: 12px; margin-right: 10px;}
+.login-form__menu li:after {content: ''; display: block; width: 1px; height: 10px; background: #aaa; position: absolute; right: 0; top: 50%; margin-top: -5px;}
+.login-form__menu li:last-child {padding-right: 0; margin-right: 0;}
+.login-form__menu li:last-child:after {display: none;}
+.login-form__menu li a {display: block; font-size: 13px;}
+.login-copy {position: absolute; left: 0; right: 0; bottom: 30px; text-align: center; font-size: 11px; color: #aaa; letter-spacing: 0.025em; font-weight: 300;}
+
+
+@media (max-width:375px) {
+	#login-title {padding-top: 140px; background-size: 140px auto;}
+	#login-form {margin-top: 20px;}
+	.login-form__select {height: 40px;}
+	.login-form__input li input[type="text"],
+	.login-form__input li input[type="password"] {height: 40px;}
+	.login-form__submit {margin-top: 10px;}
+	.login-form__submit button {height: 44px; line-height: 44px;}
+	.login-copy {bottom: 15px;}
+}
+
+
+
+/* list */
+.list-myinfo {background: #0db565; padding: 85px 20px 90px; margin: -85px -20px 0;}
+.list-myinfo__name {color: #fff; font-size: 30px; font-weight: 300; line-height: 1.2;}
+.list-myinfo__name b {font-weight: 500; font-size: 34px;}
+.list-myinfo__list {background: #fff; border-radius: 20px; padding: 20px; margin-top: -60px; box-shadow: 0px 1px 10px 0px rgba(0,0,0,0.1);}
+.list-myinfo__list dt {border-bottom: solid 1px #e5e5e5; padding-bottom: 15px;}
+.list-myinfo__list dt:after {content: ''; display: table; clear: both;}
+.list-myinfo__list dt h5 {float: left; font-size: 18px; font-weight: 400;}
+.list-myinfo__list dt p {float: right;}
+.list-myinfo__list dt p b {color: #0db565; font-size: 18px; margin-right: 3px;}
+.list-myinfo__list dd {padding-top: 15px;}
+.list-myinfo__list dd ul {margin: 0 -25px;}
+.list-myinfo__list dd ul:after {content: ''; display: table; clear: both;}
+.list-myinfo__list dd ul li {float: left; width: 50%; padding: 0 25px;}
+.list-myinfo__list dd ul li a {display: block; padding-right: 14px; background: url('../img/list_myinfo_arrow.png')no-repeat right center / 4px auto;}
+.list-myinfo__list dd ul li a:after {content: ''; display: table; clear: both;}
+.list-myinfo__list dd ul li a h5 {float: left; font-size: 16px; font-weight: 400;}
+.list-myinfo__list dd ul li a p {float: right;}
+.list-myinfo__list dd ul li a p b {color: #0db565; font-size: 16px; margin-right: 3px;}
+
+.list-title {margin-top: 60px; margin-bottom: 20px;}
+.list-title:after {content: ''; display: table; clear: both;}
+.list-title h5 {font-size: 26px; font-weight: 300; float: left; height: 25px; line-height: 25px;}
+.list-title a {display: block; width: 25px; height: 25px; position: relative; text-indent: -9999px; float: right;}
+.list-title a:before,
+.list-title a:after {content: ''; display: block; background: #333; position: absolute; left: 50%; top: 50%;}
+.list-title a:before {width: 17px; height: 1px; margin-left: -8px;}
+.list-title a:after {width: 1px; height: 17px; margin-top: -8px;}
+
+.list-group {border-top: solid 1px #444;}
+.list-item {border-bottom: solid 1px #ddd; position: relative; padding: 15px 60px 15px 0;}
+.list-item__link {display: block; position: relative; padding-left: 100px; min-height: 80px;}
+.list-item__thumb {display: block; width: 80px; height: 80px; border-radius: 20px; position: absolute; left: 0; top: 0;}
+.list-item__text {}
+.list-item__text h5 {font-size: 16px; font-weight: 300;}
+.list-item__text h5 b {font-weight: 500; font-size: 20px; margin-right: 5px; letter-spacing: 0.2em;}
+.list-item__text p {font-size: 13px; color: #666;}
+.list-item__todo {margin-top: 6px;}
+.list-item__todo:after {content: ''; display: table; clear: both;}
+.list-item__todo li {float: left; margin-right: 4px;}
+.list-item__todo li:last-child {margin-right: 0;}
+.list-item__todo li span {display: block; padding: 0 10px; height: 24px; line-height: 22px; border: solid 1px #ccc; border-radius: 20px; font-size: 12px;}
+.list-item__tel {display: block; width: 50px; height: 50px; border-radius: 50%; text-indent: -9999px; position: absolute; right: 0; top: 50%; margin-top: -25px; background: url('../img/list_call.png')no-repeat center center / 20px auto; box-shadow: 0px 1px 15px 0px rgba(0,0,0,0.1);}
+
+
+.page-copy {margin-top: 60px; text-align: center; font-size: 11px; color: #aaa; letter-spacing: 0.025em; font-weight: 300;}
+
+/* detail */
+
+.detail-info {padding-top: 10px;}
+.detail-info__thumb {display: block; width: 120px; height: 120px; margin: 0 auto; border-radius: 50%; box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.1);}
+.detail-info__name {color: #fff; text-align: center; margin-top: 10px;}
+.detail-info__name h5 {font-size: 16px; font-weight: 300;}
+.detail-info__name b {font-weight: 700; font-size: 24px; letter-spacing: 0.2em;}
+.detail-info__name p {font-size: 13px;}
+.detail-info__btn {text-align: center; margin-top: 15px;}
+.detail-info__btn li {display: inline-block; margin: 0 10px;}
+.detail-info__btn li button {background: none; display: block; color: #fff; font-size: 12px;}
+.detail-info__btn li button:before {content: ''; display: block; margin: 0 auto 3px; width: 50px; height: 50px; border-radius: 50%; box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.1);}
+.detail-info__btn li button.detail-info__call:before {background: #fff url('../img/detail_info_call.png')no-repeat center center / 20px auto;}
+.detail-info__btn li button.detail-info__family:before {background: #fff url('../img/detail_info_family.png')no-repeat center center / 25px auto;}
+.detail-info__btn li button.detail-info__location:before {background: #fff url('../img/detail_info_location.png')no-repeat center center / 25px auto;}
+.detail-info__complete {margin-bottom: -50px; margin-top: 20px;}
+.detail-info__complete button {display: block; margin: 0 auto; width: 140px; height: 44px; line-height: 44px; font-size: 16px; font-weight: 500; background: #fff; color: #0db565; border-radius: 4px; box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.1);}
+.detail-info__complete button.active {background: #0b834a; color: #fff;}
+
+.detail-title {margin-top: 30px; padding-bottom: 10px; border-bottom: solid 1px #444;}
+.detail-title h5 {font-size: 22px; font-weight: 400;}
+
+.detail-plan {}
+.detail-plan li {border-bottom: solid 1px #e5e5e5; padding: 10px 0;}
+.detail-plan li input[type="checkbox"] {}
+.detail-plan li input[type="checkbox"] + label {font-size: 16px;}
+
+.detail-memo__textarea {display: block; height: 140px; border: solid 1px #ddd; margin-top: 20px;}
+.detail-memo__submit {margin-top: 10px; text-align: right;}
+.detail-memo__submit:after {content: ''; display: table; clear: both;}
+.detail-memo__submit p {float: left; font-size: 12px;}
+.detail-memo__submit p b {}
+.detail-memo__submit button {display: inline-block; padding: 0 20px; height: 40px; line-height: 40px; font-size: 14px; font-weight: 500; background: #0db565; color: #fff; border-radius: 4px;}
+
+/* calender */
+.calender .year-month { text-align: center;}
+.calender .year-month span b { font-size: 30px;}
+.calender-tb { width: 100%; height: inherit;} 
+.calender-tb .year { font-size: 18px;}
+.calender-tb .month { font-size: 20px; font-weight: 600;}
+.calender-tb .nav { display: flex; justify-content: space-between; border: 1px solid #333333; border-radius: 5px;}
+.nav .nav-btn { width: 50px; font-size: 16px; line-height: 34px; border: none; background: none;}
+.nav-btn.go-today { width: 190px; color:#fff; background-color: #0db565; border-left: 1px solid #333333; border-right: 1px solid #333333;}
+.calender-tb .days { display: flex; margin: 25px 0 10px;}
+.calender-tb .day { width: calc(100% / 7); text-align: center;}
+.calender-tb .day:first-child { color: rgb(255, 2, 2)}
+.calender-tb .day:last-child { color: rgb(0, 42, 255)}
+.calender-tb .dates { display: flex; flex-flow: row wrap; height: 500px; border-top: 1px solid #333333; border-right: 1px solid #333333;}
+.calender-tb .date { width: calc(100% / 7);  padding: 15px; text-align: right; border-bottom: 1px solid #333333; border-left: 1px solid #333333; cursor: pointer; transition: all 0.2s;}
+.calender-tb .date:hover { background-color: rgb(67, 233, 136); color: rgb(241, 255, 233);}
+.calender-tb .date:nth-child(7n) { color: rgb(0, 42, 255)}
+.calender-tb .date:nth-child(7n-6) { color: rgb(255, 2, 2)}
+.calender-tb .date:nth-child(7n):hover { color: rgb(241, 255, 233);}
+.calender-tb .date:nth-child(7n-6):hover { color: rgb(241, 255, 233);}
+.calender-tb .date .other { opacity: .4;}
+.calender-tb .date .this.today { position: relative;}
+.calender-tb .date .this.today:before { display: block; content:''; width: 30px; height: 30px; position: absolute; top: 50%; left: 50%; border: 1px solid red; border-radius: 50%; transform:translate(-50%, -50%);}
+
+.calender-title { margin-top: 30px; padding-bottom: 10px; border-bottom: solid 1px #444;}
+.calender-title h5 { font-size: 22px; font-weight: 400;}
+.calender-list-box { width: 100%; height: inherit; }
+.calender-plan li { position: relative; border-bottom: solid 1px #e5e5e5; padding: 10px 0; transition: all 0.2s;}
+.calender-plan li span { font-size: 15px;}
+.calender-plan li:before { content:""; width: 20px; height: 1px; position: absolute; top: 22px; right: 10px; background-color: #000; box-sizing: border-box;}
+.calender-plan li:hover:before { background-color: #fff;}
+.calender-plan li:after { content:""; width: 1px; height: 20px; position: absolute; top: 13px; right: 19px; background-color: #000; box-sizing: border-box;}
+.calender-plan li:hover:after { background-color: #fff;}
+.calender-plan li:hover { background-color: #0db565; color: #fff;}
+
+.calender-more-plan li { position: relative; border-bottom: solid 1px #e5e5e5; padding: 10px 0; transition: all 0.2s;}
+.calender-more-plan li span { font-size: 15px;}
+.calender-more-plan li:before { content:""; width: 20px; height: 1px; position: absolute; top: 22px; right: 10px; background-color: #000; box-sizing: border-box;}
+.calender-more-plan li:hover:before { background-color: #fff;}
+.calender-more-plan li:after { content:""; width: 1px; height: 20px; position: absolute; top: 13px; right: 19px; background-color: #000; box-sizing: border-box;}
+.calender-more-plan li:hover:after { background-color: #fff;}
+.calender-more-plan li:hover { background-color: #0db565; color: #fff;}
+
+
+
