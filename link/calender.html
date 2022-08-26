@@ -36,11 +36,11 @@
 			<div class="calender">
 				<div class="calender-inner">
 					<div class="calender-tb">
-					<div class="year-month"><span class="year"></span><br><span class="month"></span></div> <br>
+						<button class="nav-btn go-today" onclick="goToday()">오늘 날짜로</button>
 					<div class="nav">
-					<button class="nav-btn go-prev" onclick="prevMonth()">&lt;</button>
-					<button class="nav-btn go-today" onclick="goToday()">Today</button>
-					<button class="nav-btn go-next" onclick="nextMonth()">&gt;</button>
+						<div><button class="nav-btn go-prev" onclick="prevMonth()">&lt;</button></div>
+						<div class="year-month"><span class="year"></span><span class="month"></span></div>
+						<div><button class="nav-btn go-next" onclick="nextMonth()">&gt;</button></div>
 					</div>
 					<div class="main">
 						<div class="days">

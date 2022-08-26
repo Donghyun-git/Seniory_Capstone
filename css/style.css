@@ -143,26 +143,27 @@
 /* calender */
 .calender .year-month { text-align: center;}
 .calender .year-month span b { font-size: 30px;}
-.calender-tb { width: 100%; height: inherit;} 
+.calender-tb { width: 100%; height: inherit; text-align: center;} 
 .calender-tb .year { font-size: 18px;}
 .calender-tb .month { font-size: 20px; font-weight: 600;}
-.calender-tb .nav { display: flex; justify-content: space-between; border: 1px solid #333333; border-radius: 5px;}
+.calender-tb .nav { display: flex; justify-content: space-between; }
 .nav .nav-btn { width: 50px; font-size: 16px; line-height: 34px; border: none; background: none;}
-.nav-btn.go-today { width: 190px; color:#fff; background-color: #0db565; border-left: 1px solid #333333; border-right: 1px solid #333333;}
+.nav-btn.go-today { margin-bottom: 10px; width: 80px; font-size: 11px; color:#fff; background-color: #0b834a; border-radius: 10px;}
 .calender-tb .days { display: flex; margin: 25px 0 10px;}
 .calender-tb .day { width: calc(100% / 7); text-align: center;}
 .calender-tb .day:first-child { color: rgb(255, 2, 2)}
 .calender-tb .day:last-child { color: rgb(0, 42, 255)}
-.calender-tb .dates { display: flex; flex-flow: row wrap; height: 500px; border-top: 1px solid #333333; border-right: 1px solid #333333;}
-.calender-tb .date { width: calc(100% / 7);  padding: 15px; text-align: right; border-bottom: 1px solid #333333; border-left: 1px solid #333333; cursor: pointer; transition: all 0.2s;}
-.calender-tb .date:hover { background-color: rgb(67, 233, 136); color: rgb(241, 255, 233);}
+.calender-tb .dates { display: flex; flex-flow: row wrap; height: 500px; }
+.calender-tb .date { position: relative; width: calc(100% / 7);  padding-top: 10px; text-align: center; cursor: pointer; transition: all 0.2s;}
+.calender-tb .date .c-1 { opacity: 0; z-index: 1; position: absolute; top: 33px; right: 21px; width: 15px; height: 1px; background-color: rgb(239, 143, 83); transition: all 0.5s;}
+.calender-tb .date:hover > .c-1 {
+	opacity: 1;
+}
 .calender-tb .date:nth-child(7n) { color: rgb(0, 42, 255)}
 .calender-tb .date:nth-child(7n-6) { color: rgb(255, 2, 2)}
-.calender-tb .date:nth-child(7n):hover { color: rgb(241, 255, 233);}
-.calender-tb .date:nth-child(7n-6):hover { color: rgb(241, 255, 233);}
 .calender-tb .date .other { opacity: .4;}
-.calender-tb .date .this.today { position: relative;}
-.calender-tb .date .this.today:before { display: block; content:''; width: 30px; height: 30px; position: absolute; top: 50%; left: 50%; border: 1px solid red; border-radius: 50%; transform:translate(-50%, -50%);}
+.calender-tb .date .this.today { position: relative; padding: 4px; border-radius: 20%; background: rgb(242 242 242);}
+
 
 .calender-title { margin-top: 30px; padding-bottom: 10px; border-bottom: solid 1px #444;}
 .calender-title h5 { font-size: 22px; font-weight: 400;}

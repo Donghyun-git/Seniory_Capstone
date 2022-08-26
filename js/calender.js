@@ -39,7 +39,7 @@ dates.forEach((date, i) => {
                       ? 'this'
                       : 'other';
 
-    dates[i] = `<div class="date"><span class="${condition}">${date}</span></div>`;
+    dates[i] = `<div class="date"> <div class="c-1"></div><span class="${condition}">${date}</span></div>`;
   })
 
 document.querySelector('.dates').innerHTML = dates.join(''); 
