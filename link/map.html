@@ -35,7 +35,7 @@
         </div>
         <div id="contents">
             <div id="inner">
-                <div id="map" style="width:100%;height:400px;">
+                <div id="map" style="width:100%;height:100%;">
 
                 </div>
             </div>
@@ -50,15 +50,15 @@
     <script src="../js/jquery-2.2.1.min.js"></script>
     <script src="../js/placeholders.min.js"></script>
     <script src="../js/common.js"></script>
-    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=se5rcmbh22"></script>
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=se5rcmbh22"></script>
     <script>
 
-var mapOptions = new naver.maps.Map('map', {
+    var mapOptions = new naver.maps.Map('map', {        
     center: new naver.maps.LatLng(37.3595704, 127.105399),
     zoom: 10
-});
+    });
 
-var map = new naver.maps.Map('map', mapOptions);
+    var map = new naver.maps.Map('map', mapOptions);
     </script>
 </body>
 
