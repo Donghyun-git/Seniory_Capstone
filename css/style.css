@@ -247,6 +247,6 @@ x
 
 /* sign up */
 #postcode { margin-bottom: 4px; width: 50%;}
-.signup-form__input input[type="button"] { display: inline-block; background: #0db565; color: #fff; border: none; font-size: 12px; border-radius: 4px; margin-top: -3px; margin-left: 12px; padding: 12px 8px;}
+#find-adr { /*display: inline-block; background: #0db565; color: #fff; border: none; font-size: 12px; border-radius: 4px; margin-top: -3px; margin-left: 12px; padding: 12px 8px;*/}
 #address, #detailAddress, #extraAddress { margin-bottom: 4px; width: 100%;}
 #signup-inner {display: table-cell; width: 100%; vertical-align: middle; padding: 60px 60px 100px 60px; position: relative;}
