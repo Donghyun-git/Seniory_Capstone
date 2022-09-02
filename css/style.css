@@ -247,5 +247,5 @@
 
 /* sign up */
 #postcode { margin-bottom: 4px; width: 50%;}
-#find-adr { background: #0db565; color: #fff; border: none; font-size: 12px; border-radius: 4px; margin-top: -3px; margin-left: 12px; padding: 11.8px 8px;}
+#find-adr { background: #0db565; color: #fff; border: none; font-size: 12px; border-radius: 4px; margin-top: -3px; margin-left: 12px; padding: 12px 8px;}
 #address, #detailAddress, #extraAddress { margin-bottom: 4px; width: 100%;}
