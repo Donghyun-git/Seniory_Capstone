@@ -13,48 +13,68 @@
 }
 
 
-/* login */
-#login {display: table; width: 100%; height: 100%; position: relative;}
-#login-inner {display: table-cell; width: 100%; vertical-align: middle; padding-left: 60px; padding-right: 60px;}
+/* login, signup */
+#login, #signup {display: table; width: 100%; height: 100%; position: relative;}
+#login-inner, #signup-inner {display: table-cell; width: 100%; vertical-align: middle; padding-left: 60px; padding-right: 60px; }
 #login-title {text-align: center; padding-top: 240px; background: url('../img/login_ico.png')no-repeat center top / 240px auto;}
-#login-title h2 {font-family: 'PyeongChangPeace-Bold'; font-size: 36px; line-height: 1.0em;}
-#login-title p {font-size: 16px; margin-top: 5px; color: #444;}
-#login-form {margin-top: 40px;}
+#signup-title { background:none !important}
+#login-title h2, #signup-title h2 {font-family: 'PyeongChangPeace-Bold'; font-size: 36px; line-height: 1.0em; text-align: center;}
+#login-title p, #signup-title p {font-size: 16px; margin-top: 5px; color: #444; text-align: center; }
+#login-form, #signup-form {margin-top: 40px;}
 .login-form__radio {}
-.login-form__radio {height: 30px; position: relative; text-align: center;}
+.login-form__radio, .signup-form__radio {height: 30px; position: relative; text-align: center;}
 .login-form__radio:before {content: ''; display: block; width: 60px; height: 30px; background: #f5f5f5; border: solid 1px #eee; box-sizing: border-box; position: absolute; left: 50%; margin-left: -30px; border-radius: 15px;}
-.login-form__radio input[type="radio"] {display: none;}
-.login-form__radio input[type="radio"] + label {margin-left: 0; display: inline-block; height: 30px; line-height: 30px; color: #ccc; position: relative; z-index: 1; -webkit-transition: all 0.3s; transition: all 0.3s;}
-.login-form__radio input[type="radio"]:checked + label {color: #000;}
-.login-form__radio input[type="radio"]#rdo01 + label {padding-right: 35px;}
-.login-form__radio input[type="radio"]#rdo02 + label {padding-left: 35px;}
-.login-form__radio input[type="radio"] ~ .login-form__dots {display: block; width: 24px; height: 24px; background: #0db565; position: absolute; left: 50%; margin-left: -27px; top: 50%; margin-top: -12px; border-radius: 50%; -webkit-transition: all 0.3s; transition: all 0.3s;}
-.login-form__radio input[type="radio"]#rdo02:checked ~ .login-form__dots {margin-left: 3px;}
+.signup-form__radio:before { content: ''; display: block; width: 60px; height: 30px; background: #f5f5f5; border: solid 1px #eee; box-sizing: border-box; position: absolute; left: 50%; margin-left: -30px; border-radius: 15px;}
+.login-form__radio input[type="radio"], .signup-form__radio input[type="radio"] {display: none;}
+.login-form__radio input[type="radio"] + label, .signup-form__radio input[type="radio"] + label  {margin-left: 0; display: inline-block; height: 30px; line-height: 30px; color: #ccc; position: relative; z-index: 1; -webkit-transition: all 0.3s; transition: all 0.3s;}
+.login-form__radio input[type="radio"]:checked + label, .signup-form__radio input[type="radio"]:checked + label {color: #000;}
+.login-form__radio input[type="radio"]#rdo01 + label, .signup-form__radio input[type="radio"]#rdo01 + label {padding-right: 35px;}
+.login-form__radio input[type="radio"]#rdo02 + label, .signup-form__radio input[type="radio"]#rdo02 + label {padding-left: 35px;}
+.login-form__radio input[type="radio"] ~ .login-form__dots, .signup-form__radio input[type="radio"] ~ .signup-form__dots {display: block; width: 24px; height: 24px; background: #0db565; position: absolute; left: 50%; margin-left: -27px; top: 50%; margin-top: -12px; border-radius: 50%; -webkit-transition: all 0.3s; transition: all 0.3s;}
+.login-form__radio input[type="radio"]#rdo02:checked ~ .login-form__dots, .signup-form__radio input[type="radio"]#rdo02:checked ~ .signup-form__dots {margin-left: 3px;}
 .login-form__select {}
-.login-form__input {margin-top: 15px;}
+.login-form__input, .signup-form__input {margin-top: 15px;}
+
+#signup-form__RN { width:100% !important; margin-top: 4px;}
+#signup-form__name { margin-bottom: 4px;}
+#signup-form__tel { margin-top: 4px;}
+
+.signup-form__input .signup-form__ID { padding: 0 22px 0 0;}
+.signup-form__input .signup-form__PW { padding: 0 14px 0 0;}
+.signup-form__input .signup-form__name, .signup-form__input .signup-form__adr { padding: 0 10px 0 0;}
+.signup-form__input .signup-form__RN { padding: 0 22px 0 0; }
+.signup-form__input .find-adr { float: right; background: #0db565; color: #fff; border: none; font-size: 12px; border-radius: 4px; padding: 6px 8px;}
+.signup-form__input li span { padding: 0 15px 0 0;}
+.go-start button { display: block; width: 100%; background: #0db565; color: #fff; height: 50px; line-height: 50px; font-size: 16px; font-weight: 500; border-radius: 4px;}
+
 .login-form__input li {margin-bottom: 5px;}
-.login-form__input li:last-child {margin-bottom: 0;}
+.signup-form__input li { margin: 8px 0;}
+.login-form__input li:last-child, .signup-form__input li:last-child {margin-bottom: 0;}
 .login-form__input li input[type="text"],
 .login-form__input li input[type="password"] {display: block; width: 100%;}
-.login-form__submit {margin-top: 15px;}
-.login-form__submit button {display: block; width: 100%; background: #0db565; color: #fff; height: 50px; line-height: 50px; font-size: 16px; font-weight: 500; border-radius: 4px;}
-.login-form__menu {text-align: center; margin-top: 20px;}
-.login-form__menu li {display: inline-block; position: relative; padding-right: 12px; margin-right: 10px;}
-.login-form__menu li:after {content: ''; display: block; width: 1px; height: 10px; background: #aaa; position: absolute; right: 0; top: 50%; margin-top: -5px;}
-.login-form__menu li:last-child {padding-right: 0; margin-right: 0;}
-.login-form__menu li:last-child:after {display: none;}
-.login-form__menu li a {display: block; font-size: 13px;}
-.login-copy {position: absolute; left: 0; right: 0; bottom: 30px; text-align: center; font-size: 11px; color: #aaa; letter-spacing: 0.025em; font-weight: 300;}
+.signup-form__input li input[type="text"] { display: inline-block; width: 87%;}
+.signup-form__input li input[type="password"] {display: inline-block; width: 87%;}
+.login-form__submit, .signup-form__submit {margin-top: 15px;}
+.login-form__submit button, .signup-form__submit button {display: block; width: 100%; background: #0db565; color: #fff; height: 50px; line-height: 50px; font-size: 16px; font-weight: 500; border-radius: 4px;}
+.login-form__menu, .signup-form__menu {text-align: center; margin-top: 20px;}
+.login-form__menu li, .signup-form__menu li {display: inline-block; position: relative; padding-right: 12px; margin-right: 10px;}
+.login-form__menu li:after, .signup-form__menu li:after {content: ''; display: block; width: 1px; height: 10px; background: #aaa; position: absolute; right: 0; top: 50%; margin-top: -5px;}
+.login-form__menu li:last-child, .signup-form__menu li:last-child {padding-right: 0; margin-right: 0;}
+.login-form__menu li:last-child:after, .signup-form__menu li:last-child:after {display: none;}
+.login-form__menu li a, .signup-form__menu li a {display: block; font-size: 13px;}
+.login-copy { position: absolute; left: 0; right: 0; bottom: 30px; text-align: center; font-size: 11px; color: #aaa; letter-spacing: 0.025em; font-weight: 300;}
 
 
 @media (max-width:375px) {
-	#login-title {padding-top: 140px; background-size: 140px auto;}
-	#login-form {margin-top: 20px;}
-	.login-form__select {height: 40px;}
+	#login-title, #signup-title {padding-top: 140px; background-size: 140px auto;}
+	#login-form, #signup-form {margin-top: 20px;}
+	.login-form__select, .signup-form__select {height: 40px;}
 	.login-form__input li input[type="text"],
-	.login-form__input li input[type="password"] {height: 40px;}
-	.login-form__submit {margin-top: 10px;}
-	.login-form__submit button {height: 44px; line-height: 44px;}
+	.login-form__input li input[type="password"],
+	.signup-form__input li input[type="text"],
+    .signup-form__input li input[type="password"] {height: 40px;}
+	.login-form__submit, .signup-form__submit {margin-top: 10px;}
+	.login-form__submit button, .signup-form__submit button {height: 44px; line-height: 44px;}
 	.login-copy {bottom: 15px;}
 }
 
@@ -223,6 +243,7 @@
 .mypage-list ul li:nth-child(6) { position: relative;}
 .mypage-list ul li:nth-child(6):before { content: "1.0.0"; color: lightgray; font-size: 14px; position: absolute; bottom: 20px; right: 40px;}
 
-
+/* fix */
+#fix-inner .list-group { border-top: none;}
 
 
