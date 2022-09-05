@@ -52,13 +52,21 @@
     <script src="../js/common.js"></script>
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=se5rcmbh22"></script>
     <script>
+        
+        
+        var map = new naver.maps.Map('map', {
+        center: new naver.maps.LatLng(37.3595704, 127.105399),
+        zoom: 10
+        });
 
-    var mapOptions = new naver.maps.Map('map', {        
-    center: new naver.maps.LatLng(37.3595704, 127.105399),
-    zoom: 10
-    });
+        var marker = new naver.maps.Marker({
+            position: new naver.maps.LatLng(37.3595704, 127.105399),
+            map: map
+        });
 
-    var map = new naver.maps.Map('map', mapOptions);
+
+
+    
     </script>
 </body>
 
