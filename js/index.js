@@ -13,3 +13,5 @@ let manage = document.getElementById('rdo01');
 			location.href='./link/signup_p.html';
 		}
 	}
+
+      
