@@ -1,9 +1,9 @@
 @charset "utf-8";
 @import "default.css";
 @import "animate.min.css";
-@import "fonts.css";
 @import "common.css";
 @import "font-awesome.css";
+@import "fonts.css";
 
 @font-face {
     font-family: 'PyeongChangPeace-Bold';
@@ -13,10 +13,11 @@
 }
 
 
+
 /* login, signup */
 #login, #signup {display: table; width: 100%; height: 100%; position: relative;}
 #login-inner {display: table-cell; width: 100%; vertical-align: middle; padding-left: 60px; padding-right: 60px; position: relative;}
-#login-title {text-align: center; padding-top: 240px; background: url('../img/login_ico.png')no-repeat center top / 240px auto;}
+#login-title {text-align: center; padding-top: 240px; background: url('/login_ico.png')no-repeat center top / 240px auto;}
 #signup-title { background:none !important}
 #login-title h2, #signup-title h2 {font-family: 'PyeongChangPeace-Bold'; font-size: 36px; line-height: 1.0em; text-align: center;}
 #login-title p, #signup-title p {font-size: 16px; margin-top: 5px; color: #444; text-align: center; }
@@ -94,7 +95,7 @@ x
 .list-myinfo__list dd ul {margin: 0 -25px;}
 .list-myinfo__list dd ul:after {content: ''; display: table; clear: both;}
 .list-myinfo__list dd ul li {float: left; width: 50%; padding: 0 25px;}
-.list-myinfo__list dd ul li a {display: block; padding-right: 14px; background: url('../img/list_myinfo_arrow.png')no-repeat right center / 4px auto;}
+.list-myinfo__list dd ul li a {display: block; padding-right: 14px; background: url('/list_myinfo_arrow.png')no-repeat right center / 4px auto;}
 .list-myinfo__list dd ul li a:after {content: ''; display: table; clear: both;}
 .list-myinfo__list dd ul li a h5 {float: left; font-size: 16px; font-weight: 400;}
 .list-myinfo__list dd ul li a p {float: right;}
@@ -122,7 +123,7 @@ x
 .list-item__todo li {float: left; margin-right: 4px;}
 .list-item__todo li:last-child {margin-right: 0;}
 .list-item__todo li span {display: block; padding: 0 10px; height: 24px; line-height: 22px; border: solid 1px #ccc; border-radius: 20px; font-size: 12px;}
-.list-item__tel {display: block; width: 50px; height: 50px; border-radius: 50%; text-indent: -9999px; position: absolute; right: 0; top: 50%; margin-top: -25px; background: url('../img/list_call.png')no-repeat center center / 20px auto; box-shadow: 0px 1px 15px 0px rgba(0,0,0,0.1);}
+.list-item__tel {display: block; width: 50px; height: 50px; border-radius: 50%; text-indent: -9999px; position: absolute; right: 0; top: 50%; margin-top: -25px; background: url('/list_call.png')no-repeat center center / 20px auto; box-shadow: 0px 1px 15px 0px rgba(0,0,0,0.1);}
 
 
 .page-copy {margin-top: 60px; text-align: center; font-size: 11px; color: #aaa; letter-spacing: 0.025em; font-weight: 300;}
@@ -139,9 +140,9 @@ x
 .detail-info__btn li {display: inline-block; margin: 0 10px;}
 .detail-info__btn li button {background: none; display: block; color: #fff; font-size: 12px;}
 .detail-info__btn li button:before {content: ''; display: block; margin: 0 auto 3px; width: 50px; height: 50px; border-radius: 50%; box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.1);}
-.detail-info__btn li button.detail-info__call:before {background: #fff url('../img/detail_info_call.png')no-repeat center center / 20px auto;}
-.detail-info__btn li button.detail-info__family:before {background: #fff url('../img/detail_info_family.png')no-repeat center center / 25px auto;}
-.detail-info__btn li button.detail-info__location:before {background: #fff url('../img/detail_info_location.png')no-repeat center center / 25px auto;}
+.detail-info__btn li button.detail-info__call:before {background: #fff url('/detail_info_call.png')no-repeat center center / 20px auto;}
+.detail-info__btn li button.detail-info__family:before {background: #fff url('/detail_info_family.png')no-repeat center center / 25px auto;}
+.detail-info__btn li button.detail-info__location:before {background: #fff url('/detail_info_location.png')no-repeat center center / 25px auto;}
 .detail-info__complete {margin-bottom: -50px; margin-top: 20px;}
 .detail-info__complete button {display: block; margin: 0 auto; width: 140px; height: 44px; line-height: 44px; font-size: 16px; font-weight: 500; background: #fff; color: #0db565; border-radius: 4px; box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.1);}
 .detail-info__complete button.active {background: #0b834a; color: #fff;}
