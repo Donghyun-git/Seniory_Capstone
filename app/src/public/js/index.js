@@ -16,4 +16,34 @@ let manage = document.getElementById('rdo01');
 		};
 	};
 
+	/* 로그인 기능 */
+
+	const id = document.querySelector('#id'),
+		  pw = document.querySelector('#pw'),
+		center = document.querySelector('#select_center'),
+		loginBtn = document.querySelector('#login-button');
+
+	let radioArea = document.getElementById("rdo_area");
+	
+
+	loginBtn.addEventListener("click", login);
+	
+	function radio(event) {
+		radioArea.innerText = event.target.value;
+		console.log(radioArea.textContent)
+		}
+
+	function login() {
+		const req = {
+			user: radioArea.textContent,
+			center: center.options[center.selectedIndex].text,
+			id: id.value,
+			pw: pw.value,
+		};
+
+		console.log(req);
+	
+	};
+
+
       
