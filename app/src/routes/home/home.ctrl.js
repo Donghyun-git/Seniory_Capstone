@@ -1,10 +1,6 @@
 "use strict";
-const users = {
-    user: ["관리사", "보호자"],
-    center: ["천안센터", "아산센터"],
-    id: ["donghyun", "yeonsu"],
-    pw: ["1234", "12345"],
-};
+
+const UserStorage = require("../../models/UserStorage");
 
 const output = {
     index: (req, res) => {
@@ -21,7 +17,10 @@ const process = {
         const center = req.body.center;
         const id = req.body.id;
         const pw = req.body.pw;
-
+        
+        const users = UserStorage.getUsers("user", "center", "id" ,"pw");
+        
+        const response = {};
         if (users.id.includes(id)){
             const idIdx = users.id.indexOf(id);
             if(users.user.includes(user)){
@@ -30,19 +29,16 @@ const process = {
                     const centerIdx = users.center.indexOf(center);
                     if(users.pw[idIdx]===pw && users.pw[userIdx]===pw &&
                         users.pw[centerIdx]===pw) {
-                        return res.json({
-                            success: true,
-                            msg: "로그인 성공",
-                        });
+                        response.success = true;
+                        return res.json(response);
                     }
                 };
             };
         }
 
-        return res.json({
-            success: false,
-            msg: "센텨명 사용자유형 및 아이디 비밀번호를 확인해주세요",
-        })
+        response.success = false;
+        response.msg = "센텨명 사용자유형 및 아이디 비밀번호를 확인해주세요!"
+        return res.json(response);
     },
 };
 
