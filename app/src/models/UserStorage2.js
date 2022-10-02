@@ -2,24 +2,16 @@
 
 const fs = require("fs").promises;
 
-class UserStorage {
+class UserStorage2 {
 
     static #getUsers(data, isAll, fields){
         const users = JSON.parse(data);
-        if(isAll) return users;
+        return users;
 
-        const newUsers = fields.reduce((newUsers, field) => {
-            if (users.hasOwnProperty(field)) {
-                newUsers[field] = users[field];
-            }
-            return newUsers;
-        }, {});
-
-
-        return newUsers;
     }
     static getUsers(isAll, ...fields) {
-        return fs.readFile("./src/databases/users.json")
+        return fs
+         .readFile("./src/databases/users2.json")
          .then((data) => {
             return this.#getUsers(data, isAll, fields);
          })
@@ -29,7 +21,7 @@ class UserStorage {
 
     static getUserInfo(id) {
         return fs
-         .readFile("./src/databases/users.json")
+         .readFile("./src/databases/users2.json")
          .then((data) => {
             return this.#getUserInfo(data, id);
          })
@@ -57,6 +49,7 @@ class UserStorage {
             users.id.push(userInfo.id);
             users.pw.push(userInfo.pw);
             users.name.push(userInfo.name);
+            users.silverName.push(userInfo.silverName);
             users.registNum.push(userInfo.registNum);
             users.postNum.push(userInfo.postNum);
             users.adr.push(userInfo.adr);
@@ -64,9 +57,9 @@ class UserStorage {
             users.detailAdr.push(userInfo.detailAdr);
             users.phoneNum.push(userInfo.phoneNum);
         console.log(users);
-        fs.writeFile("./src/databases/users.json", JSON.stringify(users));
+        fs.writeFile("./src/databases/users2.json", JSON.stringify(users));
         return { success: true};
     }
 };
 
-module.exports = UserStorage;
+module.exports = UserStorage2;

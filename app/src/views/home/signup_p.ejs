@@ -12,7 +12,7 @@
 <meta name="Robots" content="ALL" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>생활관리사 맞춤 서비스</title>
-<link rel="stylesheet" type="text/css" href="/style.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
 <h1 id="title">생활관리사 맞춤 서비스</h1>
@@ -28,18 +28,19 @@
 				<h2>Seniory</h2>
 				<p>생활관리사 맞춤 서비스</p>
 			</div>
-			<form action="">
-				<div id="signup-form">
+				<form id="signup-form">
 					<ul class="signup-form__input">
-						<li>
-							<select name="" id="" class="signup-form__select">
-								<option value="">천안센터</option>
-								<option value="">아산센터</option>
-							</select> <br>
+						<li> <span class="signup-form__center">센터 선택</span> 
+							<select name="" id="select_center" class="signup-form__select">
+								<option value="0">천안센터</option>
+								<option value="1">아산센터</option>
+							</select> 
 						</li>
 						<li><span class="signup-form__ID">ID</span><input type="text" name="" id="ID" placeholder="아이디를 입력하세요." /></li>
-						<li><span class="signup-form__PW">PW</span><input type="password" name="" id="PW" placeholder="비밀번호를 입력하세요." /></li>
-                        <li><span class="signup-form__name">이름</span><input type="text" name="" id="signup-form__name" placeholder="이름을 입력하세요"></li>
+						<li><span class="signup-form__PW">PW</span><input type="password" name="" id="PW" onchange="Check()" placeholder="비밀번호를 입력하세요." /></li>
+                        <li><span class="signup-form__PW_check"></span><input type="password" name="" id="PW_check" onchange="Check()" placeholder="비밀번호를 한번 더 입력하세요." /><p class="PW_check_label"></p></li>
+                        <li><span class="signup-form__pname">어르신</span><input type="text" name="" id="signup-form__pname" placeholder="어르신 성함을 입력하세요."></li>
+						<li><span class="signup-form__name">이름</span><input type="text" name="" id="signup-form__name" placeholder="이름을 입력하세요"></li>
                         <li><span class="signup-form__RN">주민등록번호</span><input type="text" name="" id="signup-form__RN" placeholder="'-' 를 제외하고 입력하세요."></li>
                         <li>
                             <span class="signup-form__adr">주소</span>
@@ -52,12 +53,11 @@
                         <li><span class="signup-form__tel">개인 전화번호</span><input type="tel" name="" id="signup-form__tel" placeholder="'-'를 제외하고 입력하세요."></li>
 					</ul>
 					<div class="signup-form__submit">
-						<button>회원가입</button>
+						<p id="signup-button">회원가입</p>
 					</div>
-                    </div>
-                </form>	
+				</form>
                     <div class="go-start mt10">
-                        <button onclick="location.href='../index.html'">처음 화면으로</button>
+                        <button onclick="location.href='/'">처음 화면으로</button>
                     </div>
 				</div>		
             </div>
@@ -66,10 +66,11 @@
 
 
 <!-- JS -->
-<script src="/jquery-2.2.1.min.js"></script>
-<script src="/placeholders.min.js"></script>
-<script src="/common.js"></script>
-<script src="/post.js"></script>
+<script src="js/jquery-2.2.1.min.js"></script>
+<script src="js/placeholders.min.js"></script>
+<script src="js/common.js"></script>
+<script src="js/post.js"></script>
+<script src="js/register2.js" defer></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     

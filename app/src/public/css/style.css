@@ -17,7 +17,7 @@
 /* login, signup */
 #login, #signup {display: table; width: 100%; height: 100%; position: relative;}
 #login-inner {display: table-cell; width: 100%; vertical-align: middle; padding-left: 60px; padding-right: 60px; position: relative;}
-#login-title {text-align: center; padding-top: 240px; background: url('/login_ico.png')no-repeat center top / 240px auto;}
+#login-title {text-align: center; padding-top: 240px; background: url('../img/login_ico.png')no-repeat center top / 240px auto;}
 #signup-title { background:none !important}
 #login-title h2, #signup-title h2 {font-family: 'PyeongChangPeace-Bold'; font-size: 36px; line-height: 1.0em; text-align: center;}
 #login-title p, #signup-title p {font-size: 16px; margin-top: 5px; color: #444; text-align: center; }
@@ -37,24 +37,21 @@
 .login-form__input, .signup-form__input {margin-top: 15px;}
 .login-form__input li { margin-bottom: 4px;}
 
-#signup-form__RN { width:100% !important; margin-top: 4px;}
-#signup-form__name { margin-bottom: 4px;}
-#signup-form__tel { margin-top: 4px;}
 
-.signup-form__input .signup-form__ID { padding: 0 22px 0 0;}
-.signup-form__input .signup-form__PW { padding: 0 14px 0 0;}
+
 .signup-form__input .signup-form__name, .signup-form__input .signup-form__adr { padding: 0 10px 0 0;}
-.signup-form__input .signup-form__RN { padding: 0 22px 0 0; }
-.signup-form__input li span { padding: 0 8px 0 0;}
-.go-start button { display: block; width: 100%; background: #0db565; color: #fff; height: 50px; line-height: 50px; font-size: 16px; font-weight: 500; border-radius: 4px;}
-x
+
+.signup-form__input li span { display: inline-block; font-weight: 700; margin: 5px 0;}
+.signup-form__input .PW_check_label { text-align: right; padding: 3px; font-weight: 500; }
+#signup-button, .go-start button { display: block; width: 100%; background: #0db565; color: #fff; height: 50px; line-height: 50px; font-size: 16px; font-weight: 500; border-radius: 4px;}
+
 .login-form__input li {margin-bottom: 5px;}
 .signup-form__input li { margin: 8px 0;}
 .login-form__input li:last-child, .signup-form__input li:last-child {margin-bottom: 0;}
 .login-form__input li input[type="text"],
 .login-form__input li input[type="password"] {display: block; width: 100%;}
-.signup-form__input li input[type="text"] { display: inline-block; width: 87%;}
-.signup-form__input li input[type="password"] {display: inline-block; width: 87%;}
+.signup-form__input li input[type="text"] { display: inline-block; width: 100%;}
+.signup-form__input li input[type="password"] {display: inline-block; width: 100%;}
 .login-form__submit, .signup-form__submit {margin-top: 15px;}
 .login-form__submit button, .signup-form__submit button {display: block; width: 100%; background: #0db565; color: #fff; height: 50px; line-height: 50px; font-size: 16px; font-weight: 500; border-radius: 4px;}
 .login-form__menu, .signup-form__menu {text-align: center; margin-top: 20px;}
@@ -140,9 +137,9 @@ x
 .detail-info__btn li {display: inline-block; margin: 0 10px;}
 .detail-info__btn li button {background: none; display: block; color: #fff; font-size: 12px;}
 .detail-info__btn li button:before {content: ''; display: block; margin: 0 auto 3px; width: 50px; height: 50px; border-radius: 50%; box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.1);}
-.detail-info__btn li button.detail-info__call:before {background: #fff url('/detail_info_call.png')no-repeat center center / 20px auto;}
-.detail-info__btn li button.detail-info__family:before {background: #fff url('/detail_info_family.png')no-repeat center center / 25px auto;}
-.detail-info__btn li button.detail-info__location:before {background: #fff url('/detail_info_location.png')no-repeat center center / 25px auto;}
+.detail-info__btn li button.detail-info__call:before {background: #fff url('../img/detail_info_call.png')no-repeat center center / 20px auto;}
+.detail-info__btn li button.detail-info__family:before {background: #fff url('../img/detail_info_family.png')no-repeat center center / 25px auto;}
+.detail-info__btn li button.detail-info__location:before {background: #fff url('../img/detail_info_location.png')no-repeat center center / 25px auto;}
 .detail-info__complete {margin-bottom: -50px; margin-top: 20px;}
 .detail-info__complete button {display: block; margin: 0 auto; width: 140px; height: 44px; line-height: 44px; font-size: 16px; font-weight: 500; background: #fff; color: #0db565; border-radius: 4px; box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.1);}
 .detail-info__complete button.active {background: #0b834a; color: #fff;}
@@ -243,8 +240,8 @@ x
 #fix-inner .list-group { border-top: none;}
 
 /* sign up */
-#postcode { margin-bottom: 4px; width: 40%;}
+#postcode { margin-bottom: 4px; width: 58%;}
 #find-adr { display: inline-block; background: #0db565; color: #fff; border: none; font-size: 12px; border-radius: 4px; margin-top: -3px; margin-left: 12px; padding: 12px 8px;}
 #address, #detailAddress, #extraAddress { margin-bottom: 4px; width: 100%;}
 #signup-inner {display: table-cell; width: 100%; vertical-align: middle; padding: 60px 60px 100px 60px; position: relative;}
-#signup-form__pname { width: 83.5%;}
+#signup-form__pname { width: 100%;}
