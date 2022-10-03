@@ -63,7 +63,7 @@ let month = document.querySelector('.month');
        
       for(i=0; i<todayList.length; i++){
         resultHTML += `
-                <a href="detail.html"><li><span>${todayList[i].name} 어르신 방문</span></li></a>
+                <a href="detail"><li><span>${todayList[i].name} 어르신 방문</span></li></a>
                 `;
       };
       
@@ -71,7 +71,7 @@ let month = document.querySelector('.month');
         
       for(i=0; i<otherList.length; i++){
         resultHTML += `
-                <a href="detail.html"><li><span>${otherList[i].name} 어르신 방문</span></li></a>
+                <a href="detail"><li><span>${otherList[i].name} 어르신 방문</span></li></a>
                 `;
 
       }
@@ -79,7 +79,7 @@ let month = document.querySelector('.month');
         
       for(i=0; i<thisList.length; i++){
         resultHTML += `
-                <a href="detail.html"><li><span>${thisList[i].name} 어르신 방문</span></li></a>
+                <a href="detail"><li><span>${thisList[i].name} 어르신 방문</span></li></a>
                 `;
 
       }
