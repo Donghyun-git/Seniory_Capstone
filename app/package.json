@@ -64,6 +64,7 @@
     "object-inspect": "^1.12.2",
     "on-finished": "^2.4.1",
     "parseurl": "^1.3.3",
+    "path": "^0.12.7",
     "path-to-regexp": "^0.1.7",
     "process-nextick-args": "^2.0.1",
     "proxy-addr": "^2.0.7",

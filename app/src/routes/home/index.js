@@ -31,12 +31,4 @@ router.get("/modify_p", user.output.modify_p);
 router.get("/mypage_p", user.output.mypage_p);
 
 
-
-router.post("/", ctrl.process.index);
-router.post("/index_p", user.process.login);
-
-
-router.post("/signup", ctrl.process.signup);
-router.post("/signup_p", user.process.signup_p);
-
 module.exports = router;

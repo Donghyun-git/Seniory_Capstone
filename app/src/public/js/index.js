@@ -30,64 +30,7 @@ let signUp = document.querySelector('.sign-up');
 		radioArea.innerText = event.target.value;
 		console.log(radioArea.textContent)
 		}
-	
-	function login() {
-		const req = {
-			user: radioArea.textContent,
-			center: center.options[center.selectedIndex].text,
-			id: id.value,
-			pw: pw.value,
-		};
 
-		fetch("/", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify(req),
-		})
-		  .then((res) => res.json())
-		  .then((res) => {
-			if (res.success){
-				location.href ="/list";
-			} else {
-				alert(res.msg);
-			}
-		  })
-		  .catch((err) => {
-			console.error(("로그인 중 에러 발생"));
-		  });
-			
-	};
-
-	function login2() {
-		const req = {
-			user: radioArea.textContent,
-			center: center.options[center.selectedIndex].text,
-			id: id.value,
-			pw: pw.value,
-		};
-
-		fetch("/index_p", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify(req),
-		})
-		  .then((res) => res.json())
-		  .then((res) => {
-			if (res.success){
-				location.href ="/list";
-			} else {
-				alert(res.msg);
-			}
-		  })
-		  .catch((err) => {
-			console.error(("로그인 중 에러 발생"));
-		  });
-			
-	};
 
 
       

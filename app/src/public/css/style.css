@@ -53,7 +53,8 @@
 .signup-form__input li input[type="text"] { display: inline-block; width: 100%;}
 .signup-form__input li input[type="password"] {display: inline-block; width: 100%;}
 .login-form__submit, .signup-form__submit {margin-top: 15px;}
-.login-form__submit button, .signup-form__submit button {display: block; width: 100%; background: #0db565; color: #fff; height: 50px; line-height: 50px; font-size: 16px; font-weight: 500; border-radius: 4px;}
+.login-form__submit #login-button, 
+.signup-form__submit #signup-button, #login-button2 {display: block; width: 100%; background: #0db565; color: #fff; height: 50px; line-height: 50px; font-size: 16px; font-weight: 500; border-radius: 4px;}
 .login-form__menu, .signup-form__menu {text-align: center; margin-top: 20px;}
 .login-form__menu li, .signup-form__menu li {display: inline-block; position: relative; padding-right: 12px; margin-right: 10px;}
 .login-form__menu li:after, .signup-form__menu li:after {content: ''; display: block; width: 1px; height: 10px; background: #aaa; position: absolute; right: 0; top: 50%; margin-top: -5px;}
