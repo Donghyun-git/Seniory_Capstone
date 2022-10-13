@@ -1,7 +1,5 @@
 "use strict"
 
-const User2 =require("../../models/User2");
-
 
 const output = {
     index_p: (req, res) => {
