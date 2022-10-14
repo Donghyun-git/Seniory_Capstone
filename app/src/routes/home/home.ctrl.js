@@ -1,7 +1,5 @@
 "use strict";
 
-const User = require("../../models/User");
-
 const output = {
     index: (req, res) => {
         res.render("home/index");

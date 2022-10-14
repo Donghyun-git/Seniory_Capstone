@@ -7,6 +7,10 @@ const fs = require("fs");
 const data = fs.readFileSync('/Users/ddongs/Desktop/portfolio/Capstone_re/app/src/databases/user.json');
 const conf = JSON.parse(data);
 const cors = require("cors");
+const path = require("path");
+const url = require("url");
+const qs = require("querystring");
+const template = require('./src/public/js/template.js');
 const bodyParser = require("body-parser");
 const encoder = bodyParser.urlencoded();
 const mysql = require("mysql");
@@ -15,6 +19,8 @@ const MySqlStore = require("express-mysql-session")(session);
 
 //라우팅
 const home = require("./src/routes/home");
+const { response } = require('express');
+const QueryString = require('qs');
 
 //앱 세팅
 app.set("views", "./src/views");
@@ -50,17 +56,19 @@ connection.connect(function(error){
     else console.log("connected");
 });
 
-//테이블 쿼리문
-connection.query('select * from user;', function(error, results, fields) {
-    if(error) throw error;
-});
+//환자 json 파일 생성
+connection.query('select * from patient;', function(error, results, fields){   
+    let obj = {};
+        if(error) throw error;
+        results.map(v => {
+            if (!(v.program in obj))
+                obj[v.program] = [];
+                obj[v.program].push(v);
+                delete v['program'];
+        })
 
-
-connection.query('select * from protect;', function(error, results, fields) {
-    if(error) throw error;
-})
-
-//보호자 환자 조인
+        
+   });
 
 //관리자 로그인
 app.post("/",encoder, async function(req, res){
@@ -68,7 +76,7 @@ app.post("/",encoder, async function(req, res){
     const id = req.body.id;
     const pw = req.body.pw;
     const info = [];
-    
+
     connection.query('select center, id, pw, name from user where center = ? and id = ? and pw = ?;',[center, id, pw], function(error, results, fields) {
         let userName = results[0].name;
         connection.query('select user.name, patient.pname, patient.page, patient.sex, patient.pregistNum, patient.ppostNum, patient.padr, patient.pcenter, patient.memo, patient.book, patient.cloth, patient.bath, patient.tooth, patient.eat, patient.health, patient.facewash, patient.picnic from user inner join patient on user.name = patient.manName where user.name = ?;',[userName],
@@ -267,10 +275,17 @@ app.get("/list1", function(req, res){
     let output = "";
     let list ="";
     if(req.session.name && req.session.info && req.session.workCount){
+        let info = req.session.info;
+        let json = JSON.stringify(info);
+        let parseData = JSON.parse(json);
+        for(let i=0; i<parseData.length; i++){
+            fs.writeFileSync('patient.json', json);
+        }
+        
         for(let i=0; i<2; i++){
             list += `
             <li class="list-item">
-                                <a href="detail1" class="list-item__link">
+                                <a href="detail1/?pname=${req.session.info[i].pname}" class="list-item__link">
                                     <em class="list-item__thumb" style="background:url('../../img/profile_sample.jpg')no-repeat center center / cover;"></em>
                                     <div class="list-item__text">
                                         <h5><b>${req.session.info[i].pname}</b>어르신</h5>
@@ -428,7 +443,7 @@ app.get("/fixwork1", function(req, res){
         for(let i=0; i<req.session.info.length; i++){
             list += `
             <li class="list-item">
-                                <a href="detail" class="list-item__link">
+                                <a href="detail1" class="list-item__link">
                                     <em class="list-item__thumb" style="background:url('../img/profile_sample.jpg')no-repeat center center / cover;"></em>
                                     <div class="list-item__text">
                                         <h5><b>${req.session.info[i].pname}</b>어르신</h5>
@@ -506,8 +521,27 @@ app.get("/fixwork1", function(req, res){
 
 //상세페이지
 app.get("/detail1", function(req, res){
-        console.log(info);
-    }
+        var _url = express.request.url;
+        var curURLObj = url.parse(`localhost:3000/detail1/?pname=${req.session.info[0].pname}`);
+        var curStr = url.format(curURLObj);
+        var paramObj = QueryString.parse(curURLObj.query);
+        console.log(paramObj);
+        console.log(curStr);
+  
+
+                connection.query(`SELECT * FROM patient where manName = "${req.session.name}"`, function(error, results){
+                    if (error) throw error;
+                    var title = "생활관리사 맞춤 서비스";
+                    
+                    var pname = req.session.info[0].pname;
+                    var padr = req.session.info[0].padr;
+                    var page = req.session.info[0].page;
+                    var sex = req.session.info[0].sex;
+                    var html = template.HTML(title, pname, padr, page, sex);
+                    res.send(html);
+                });
+                
+            }
 )
 
 //로그인 성공(보호자)
