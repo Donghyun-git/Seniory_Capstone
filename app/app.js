@@ -10,17 +10,20 @@ const cors = require("cors");
 const path = require("path");
 const url = require("url");
 const qs = require("querystring");
-const template = require('./src/public/js/template.js');
 const bodyParser = require("body-parser");
 const encoder = bodyParser.urlencoded();
 const mysql = require("mysql");
 const session = require("express-session");
 const MySqlStore = require("express-mysql-session")(session);
+const patientjson = require('/Users/ddongs/Desktop/portfolio/Capstone_re/app/patient.json')
+
+//json 파싱
+let json = JSON.stringify(patientjson);
+let json1 = JSON.parse(json);
+
 
 //라우팅
 const home = require("./src/routes/home");
-const { response } = require('express');
-const QueryString = require('qs');
 
 //앱 세팅
 app.set("views", "./src/views");
@@ -78,26 +81,42 @@ app.post("/",encoder, async function(req, res){
     const info = [];
 
     connection.query('select center, id, pw, name from user where center = ? and id = ? and pw = ?;',[center, id, pw], function(error, results, fields) {
-        let userName = results[0].name;
-        connection.query('select user.name, patient.pname, patient.page, patient.sex, patient.pregistNum, patient.ppostNum, patient.padr, patient.pcenter, patient.memo, patient.book, patient.cloth, patient.bath, patient.tooth, patient.eat, patient.health, patient.facewash, patient.picnic from user inner join patient on user.name = patient.manName where user.name = ?;',[userName],
-        function(error, results, field) {
+        if(results.length == 0){
+            res.send(`<script>alert('로그인에 실패하였습니다! 사용자 정보를 다시 확인해주세요!');
+            location.href='/'</script>`);
+        } else {
+        connection.query('select user.name, patient.pname, patient.page, patient.sex, patient.pregistNum, patient.ppostNum, patient.padr, patient.pcenter, patient.memo, patient.book, patient.cloth, patient.bath, patient.tooth, patient.eat, patient.health, patient.facewash, patient.picnic from user inner join patient on user.name = patient.manName where user.name = ?;',[results[0].name],
+        function(error, results, fields) {
             if(error) throw error
                 if (results.length > 0){
                     for(let i=0; i<results.length; i++){
-                        let patient = {
+                        let patient ={
+                            id: i, 
+                            info: {
                                 "pname": results[i].pname,
                                 "page":  results[i].page,
                                 "sex":   results[i].sex,
                                 "padr":  results[i].padr 
-                             }
+                             },
+                            list: {
+                                "memo": results[i].memo,
+                                "book": results[i].book,
+                                "cloth": results[i].cloth,
+                                "bath": results[i].bath,
+                                "tooth": results[i].tooth,
+                                "eat": results[i].eat,
+                                "health": results[i].health,
+                                "facewash": results[i].facewash,
+                                "picnic": results[i].picnic,
+                            }
+                            }
                         info.push(patient);
                   }
                         if(results[0] !==undefined){
-                                    req.session.name = userName;
+                                    req.session.name = results[0].name;
                                     req.session.isLogined = true;
                                     req.session.info = info;
                                     req.session.workCount = info.length;
-                                    console.log(req.session.info[0].pname);
                                     req.session.save(() => {
                                         res.redirect('/list1');
                                     });
@@ -106,7 +125,7 @@ app.post("/",encoder, async function(req, res){
                                 res.send(`<script>alert('로그인에 실패하였습니다! 사용자 정보를 다시 확인해주세요!');
                                 location.href='/'</script>`);
                             }
-         });
+         })};
      });
  });
 
@@ -215,7 +234,6 @@ app.post("/signup_p", encoder, function(req, res){
     const phoneNum = req.body.phoneNum;
     const pwCheck = req.body.pwCheck;
     
-    console.log(req.body);
             if (!id){
                 res.send(`<script>alert('아이디를 입력해주세요!');
                 location.href='/signup_p'</script>`);
@@ -281,15 +299,14 @@ app.get("/list1", function(req, res){
         for(let i=0; i<parseData.length; i++){
             fs.writeFileSync('patient.json', json);
         }
-        
         for(let i=0; i<2; i++){
             list += `
             <li class="list-item">
-                                <a href="detail1/?pname=${req.session.info[i].pname}" class="list-item__link">
+                                <a href="/detail1?id=${parseData[i].id}" class="list-item__link">
                                     <em class="list-item__thumb" style="background:url('../../img/profile_sample.jpg')no-repeat center center / cover;"></em>
                                     <div class="list-item__text">
-                                        <h5><b>${req.session.info[i].pname}</b>어르신</h5>
-                                        <p>${req.session.info[i].padr} / ${req.session.info[i].page} / ${req.session.info[i].sex}</p>
+                                        <h5><b>${parseData[i].info.pname}</b>어르신</h5>
+                                        <p>${parseData[i].info.padr} / ${parseData[i].info.page} / ${parseData[i].info.sex}</p>
                                     </div>
                                     <ul class="list-item__todo">
                                         <li><span>책읽기</span></li>
@@ -429,7 +446,6 @@ app.get("/list1", function(req, res){
             </body>
             </html>
             `;
-        console.log(req.session.info);
 
         res.send(output);
     } 
@@ -440,14 +456,17 @@ app.get("/fixwork1", function(req, res){
     let output = "";
     let list ="";
     if(req.session.name && req.session.info && req.session.workCount){
+        let info = req.session.info;
+        let json = JSON.stringify(info);
+        let parseData = JSON.parse(json);
         for(let i=0; i<req.session.info.length; i++){
             list += `
             <li class="list-item">
-                                <a href="detail1" class="list-item__link">
+                                <a href="/detail1?id=${parseData[i].id}" class="list-item__link">
                                     <em class="list-item__thumb" style="background:url('../img/profile_sample.jpg')no-repeat center center / cover;"></em>
                                     <div class="list-item__text">
-                                        <h5><b>${req.session.info[i].pname}</b>어르신</h5>
-                                        <p>${req.session.info[i].padr} / ${req.session.info[i].page} / ${req.session.info[i].sex}</p>
+                                        <h5><b>${parseData[i].info.pname}</b>어르신</h5>
+                                        <p>${parseData[i].info.padr} / ${parseData[i].info.page} / ${parseData[i].info.sex}</p>
                                     </div>
                                 </a>
                                 <a href="tel:010-8300-7586" class="list-item__tel">전화걸기</a>
@@ -519,30 +538,123 @@ app.get("/fixwork1", function(req, res){
 }
 });
 
-//상세페이지
-app.get("/detail1", function(req, res){
-        var _url = express.request.url;
-        var curURLObj = url.parse(`localhost:3000/detail1/?pname=${req.session.info[0].pname}`);
-        var curStr = url.format(curURLObj);
-        var paramObj = QueryString.parse(curURLObj.query);
-        console.log(paramObj);
-        console.log(curStr);
-  
 
-                connection.query(`SELECT * FROM patient where manName = "${req.session.name}"`, function(error, results){
-                    if (error) throw error;
-                    var title = "생활관리사 맞춤 서비스";
+//상세페이지
+app.get('/detail1', function(req, res){
+
+    for(let i=0; i<json1.length; i++){
+        if(json1[i].id == req.query.id){
+    var output = `
+            <!DOCTYPE HTML>
+        <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+        <head>
+        <meta charset="utf-8">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+        <meta name="mobile-web-app-capable" content="yes">	
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="Robots" content="ALL" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>생활관리사 맞춤 서비스</title>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        </head>
+        <body>
+        <h1 id="title">생활관리사 맞춤 서비스</h1>
+
+
+        <div id="wrap">
+            <div id="gnb">
+                <a href="list1" id="gnb-back">뒤로</a>
+                <h2 id="gnb-title">${json1[i].info.pname} 어르신</h2>
+                <button id="gnb-menu"><span>메뉴</span></button>
+                <ul id="gnb-list">
+                    <li><a href="list1">오늘업무</a></li>
+                    <li><a href="calender">종합업무</a></li>
+                    <li><a href="workshare">인수인계</a></li>
+                    <li><a href="manage">어르신 관리</a></li>
+                    <li><a href="mypage">마이페이지</a></li>
+                    <li><a href="/">로그아웃</a></li>
+                </ul>
+            </div>
+            <div id="contents">
+                <div id="inner">
                     
-                    var pname = req.session.info[0].pname;
-                    var padr = req.session.info[0].padr;
-                    var page = req.session.info[0].page;
-                    var sex = req.session.info[0].sex;
-                    var html = template.HTML(title, pname, padr, page, sex);
-                    res.send(html);
-                });
-                
-            }
-)
+                    <div class="list-myinfo">
+                        <div class="detail-info">
+                            <em class="detail-info__thumb" style="background:url('../img/profile_sample.jpg')no-repeat center center / cover;"></em>
+                            <div class="detail-info__name">
+                                <h5><b>${json1[i].info.pname}</b>어르신</h5>
+                                <p>${json1[i].info.padr} / ${json1[i].info.page} / ${json1[i].info.sex}</p>
+                            </div>
+                            <ul class="detail-info__btn">
+                                <li><button class="detail-info__call" onclick="location.href='tel:010-8300-7586'">전화걸기</button></li>
+                                <li><button class="detail-info__family" onclick="location.href='tel:010-8300-7586'">보호자연락</button></li>
+                                <li><button class="detail-info__location" onclick="location.href='map'">위치정보</button></li>
+                            </ul>
+                            <div class="detail-info__complete">
+                                <button>방문완료</button>
+                                <!-- <button class="active">방문완료</button> -->
+                            </div>
+                        </div>
+                    </div>
+                    <form action="/detail1" method="POST">
+                    <div class="detail-title">
+                        <h5>업무계획</h5>
+                    </div>
+
+                    <ul class="detail-plan">
+                        <li><input type="checkbox" name="chk" id="chk01" checked/><label for="chk01">책 읽기</label></li>
+                        <li><input type="checkbox" name="chk" id="chk02" checked/><label for="chk02">환복</label></li>
+                        <li><input type="checkbox" name="chk" id="chk03" /><label for="chk03">목욕 하기</label></li>
+                        <li><input type="checkbox" name="chk" id="chk04" /><label for="chk04">구강 관리</label></li>
+                        <li><input type="checkbox" name="chk" id="chk05" /><label for="chk05">식사 하기</label></li>
+                        <li><input type="checkbox" name="chk" id="chk06" /><label for="chk06">신체 기능 유지</label></li>
+                        <li><input type="checkbox" name="chk" id="chk07" /><label for="chk07">세면도움</label></li>
+                        <li><input type="checkbox" name="chk" id="chk08" /><label for="chk08">외출 동행</label></li>
+                    </ul>
+
+                    <div class="detail-title">
+                        <h5>메모</h5>
+                    </div>
+
+                    
+                        <textarea name="" id="" cols="30" rows="10" class="detail-memo__textarea" placeholder="특이사항이나 메모 내용을 입력해주세요."></textarea>
+                        <div class="detail-memo__submit">
+                            <p><b>0</b> / 300자</p>
+                            <input type="submit" name="save" value="저장하기"></input>
+                        </div>
+                    </form>
+
+                    <p class="page-copy">Copyright &copy; Dongs All Rights Reserved.</p>
+
+                </div><!-- inner -->
+            </div><!-- content -->
+        </div><!-- wrap -->
+
+
+
+
+        <!-- JS -->
+        <script src="js/jquery-2.2.1.min.js"></script>
+        <script src="js/placeholders.min.js"></script>
+        <script src="js/common.js"></script>
+        </body>
+        </html>
+    `
+    res.send(output);
+
+        };
+    };
+  });
+
+//메모 및 할일 등록
+app.post('detail1', function(res, req){
+
+});
+
 
 //로그인 성공(보호자)
 app.get("/mypage_p1", function(req, res){
@@ -633,6 +745,7 @@ app.get("/logout", function(req, res) {
     console.log(session);
 });
 
+
 //로그아웃(보호자)
 app.get("/list1", function(req, res) {
     delete req.session.name;
@@ -642,6 +755,7 @@ app.get("/list1", function(req, res) {
         res.redirect('/');
     });
 });
+
 
 //로그인 성공(보호자)
 app.get("/index_p", function(req, res){

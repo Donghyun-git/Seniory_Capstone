@@ -158,7 +158,7 @@
 .detail-memo__submit:after {content: ''; display: table; clear: both;}
 .detail-memo__submit p {float: left; font-size: 12px;}
 .detail-memo__submit p b {}
-.detail-memo__submit button {display: inline-block; padding: 0 20px; height: 40px; line-height: 40px; font-size: 14px; font-weight: 500; background: #0db565; color: #fff; border-radius: 4px;}
+.detail-memo__submit button, input[type=submit] {display: inline-block; padding: 0 20px; height: 40px; line-height: 40px; font-size: 14px; font-weight: 500; background: #0db565; color: #fff; border-radius: 4px;}
 
 /* calender */
 .calender .year-month { text-align: center;}
