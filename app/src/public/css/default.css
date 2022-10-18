@@ -12,7 +12,7 @@ ul{list-style:none;}
 table{width:100%;border-spacing:0;border-collapse:collapse;}
 img,fieldset{border:0;}
 address,cite,code,em{font-style:normal;font-weight:normal;}
-label,img,input,select,textarea,button{vertical-align:middle;}
+label,img,input,select,textarea,button,input[type=textarea]{vertical-align:middle;}
 .hide,caption,legend{line-height:0;font-size:1px;overflow:hidden;}
 hr{display:none;}
 main,header,section,nav,footer,aside,article,figure{display:block;}
@@ -29,14 +29,16 @@ input::-webkit-input-placeholder{color:#999; font-size:inherit;}
 input[type=tel],
 input[type=text],
 input[type=password],
-input[type=email], 
+input[type=email],
 input[type=search] {height: 46px; padding: 0 15px; display: block; width: 100%; background: #fff; border-radius: 4px; border: solid 1px #ddd; -webkit-appearance:none; -moz-appearance:none; appearance:none;}
+
 
 input[type=tel]:focus,
 input[type=text]:focus,
 input[type=password]:focus,
 input[type=email]:focus, 
 input[type=search]:focus {outline: solid 2px #0db565;}
+input[type=textarea]:focus {outline: solid 2px #0db565;}
 
 input[type=tel]::placeholder,
 input[type=text]::placeholder,
@@ -82,8 +84,8 @@ input[type=password].dark,
 input[type=email].dark,
 input[type=search].dark {background: #120635;}
 
-textarea[readonly],
-textarea[disabled]{color:#666;}
+input[type=textarea][readonly],
+input[type=textarea][disabled]{color:#666;}
 input[type=submit] {border-radius: 0px 0px 0px 0px; -moz-border-radius: 0px 0px 0px 0px; -webkit-border-radius: 0px 0px 0px 0px;}
 
 
@@ -103,7 +105,7 @@ input[type="file"] {}
 select {display: block; width: 100%; height: 46px; padding: 0 15px; cursor: pointer; border: none; border-radius: 4px; border: solid 1px #ddd; -webkit-appearance:none; -moz-appearance:none; appearance:none; background: url('../img/select_arrow.png')no-repeat right 10px center / 10px auto;}
 select:focus {outline: solid 2px #0db565;}
 
-textarea {resize: none; display: block; width: 100%; padding: 10px; border-radius: 4px; -webkit-appearance:none; -moz-appearance:none; appearance:none;}
+input[type=textarea] {resize: none; display: block; width: 100%; padding: 10px; border-radius: 4px; -webkit-appearance:none; -moz-appearance:none; appearance:none;}
 textarea:focus {outline: solid 2px #0db565;}
 
 button {cursor: pointer; -webkit-appearance:none; -moz-appearance:none; appearance:none;}

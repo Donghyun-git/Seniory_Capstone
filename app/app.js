@@ -7,15 +7,15 @@ const fs = require("fs");
 const data = fs.readFileSync('/Users/ddongs/Desktop/portfolio/Capstone_re/app/src/databases/user.json');
 const conf = JSON.parse(data);
 const cors = require("cors");
-const path = require("path");
-const url = require("url");
-const qs = require("querystring");
 const bodyParser = require("body-parser");
 const encoder = bodyParser.urlencoded();
 const mysql = require("mysql");
 const session = require("express-session");
 const MySqlStore = require("express-mysql-session")(session);
 const patientjson = require('/Users/ddongs/Desktop/portfolio/Capstone_re/app/patient.json')
+
+//컨트롤러 
+const ctrl = require("/Users/ddongs/Desktop/portfolio/Capstone_re/app/src/routes/home/home.ctrl.js");
 
 //json 파싱
 let json = JSON.stringify(patientjson);
@@ -30,8 +30,9 @@ app.set("views", "./src/views");
 app.set("view engine", "ejs");
 
 app.use(express.static(`${__dirname}/src/public`));
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 app.use("/", home); // use -> 미들웨어 등록해주는 메소드.
 app.use(session({
     secret              : 'ABCD1234ABAB!@',
@@ -52,6 +53,7 @@ const connection = mysql.createConnection({
     password: conf.password,
     port: conf.port,
     database: conf.database,
+    multipleStatements: true
 });
 
 connection.connect(function(error){
@@ -59,19 +61,6 @@ connection.connect(function(error){
     else console.log("connected");
 });
 
-//환자 json 파일 생성
-connection.query('select * from patient;', function(error, results, fields){   
-    let obj = {};
-        if(error) throw error;
-        results.map(v => {
-            if (!(v.program in obj))
-                obj[v.program] = [];
-                obj[v.program].push(v);
-                delete v['program'];
-        })
-
-        
-   });
 
 //관리자 로그인
 app.post("/",encoder, async function(req, res){
@@ -541,7 +530,7 @@ app.get("/fixwork1", function(req, res){
 
 //상세페이지
 app.get('/detail1', function(req, res){
-
+    console.log(req.body);
     for(let i=0; i<json1.length; i++){
         if(json1[i].id == req.query.id){
     var output = `
@@ -600,33 +589,38 @@ app.get('/detail1', function(req, res){
                             </div>
                         </div>
                     </div>
-                    <form action="/detail1" method="POST">
+
+                  
                     <div class="detail-title">
-                        <h5>업무계획</h5>
+                        <h5>업무 계획</h5>
                     </div>
 
                     <ul class="detail-plan">
-                        <li><input type="checkbox" name="chk" id="chk01" checked/><label for="chk01">책 읽기</label></li>
-                        <li><input type="checkbox" name="chk" id="chk02" checked/><label for="chk02">환복</label></li>
-                        <li><input type="checkbox" name="chk" id="chk03" /><label for="chk03">목욕 하기</label></li>
-                        <li><input type="checkbox" name="chk" id="chk04" /><label for="chk04">구강 관리</label></li>
-                        <li><input type="checkbox" name="chk" id="chk05" /><label for="chk05">식사 하기</label></li>
-                        <li><input type="checkbox" name="chk" id="chk06" /><label for="chk06">신체 기능 유지</label></li>
-                        <li><input type="checkbox" name="chk" id="chk07" /><label for="chk07">세면도움</label></li>
-                        <li><input type="checkbox" name="chk" id="chk08" /><label for="chk08">외출 동행</label></li>
+                        <li><input type="checkbox" name="book" id="chk01" checked/><label for="book">책 읽기</label></li>
+                        <li><input type="checkbox" name="cloth" id="chk02" checked/><label for="chk02">환복</label></li>
+                        <li><input type="checkbox" name="wash" id="chk03" /><label for="chk03">목욕 하기</label></li>
+                        <li><input type="checkbox" name="tooth" id="chk04" /><label for="chk04">구강 관리</label></li>
+                        <li><input type="checkbox" name="eat" id="chk05" /><label for="chk05">식사 하기</label></li>
+                        <li><input type="checkbox" name="health" id="chk06" /><label for="chk06">신체 기능 유지</label></li>
+                        <li><input type="checkbox" name="facewash" id="chk07" /><label for="chk07">세면도움</label></li>
+                        <li><input type="checkbox" name="picnic" id="chk08" /><label for="chk08">외출 동행</label></li>
                     </ul>
+                    <div class="detail-title">
+                        <h5>업무 목록</h5>               
+                    </div>
+                    <p class="mt10" style="text-align:center; font-size: 16px; ">등록된 업무가 없습니다!</p>
 
                     <div class="detail-title">
                         <h5>메모</h5>
                     </div>
-
-                    
-                        <textarea name="" id="" cols="30" rows="10" class="detail-memo__textarea" placeholder="특이사항이나 메모 내용을 입력해주세요."></textarea>
+                        <input type="textarea" class="detail-memo__textarea" name="memo" id="memo" cols="30" rows="10" class="detail-memo__textarea" placeholder="특이사항이나 메모 내용을 입력해주세요.">
+                        
                         <div class="detail-memo__submit">
                             <p><b>0</b> / 300자</p>
-                            <input type="submit" name="save" value="저장하기"></input>
+                            <button onclick="submit()">저장하기</button>
                         </div>
-                    </form>
+                    
+                 
 
                     <p class="page-copy">Copyright &copy; Dongs All Rights Reserved.</p>
 
@@ -634,14 +628,15 @@ app.get('/detail1', function(req, res){
             </div><!-- content -->
         </div><!-- wrap -->
 
-
+        </body>
 
 
         <!-- JS -->
         <script src="js/jquery-2.2.1.min.js"></script>
         <script src="js/placeholders.min.js"></script>
         <script src="js/common.js"></script>
-        </body>
+        <script src="js/index.js"></script>
+
         </html>
     `
     res.send(output);
@@ -651,8 +646,9 @@ app.get('/detail1', function(req, res){
   });
 
 //메모 및 할일 등록
-app.post('detail1', function(res, req){
-
+app.post('/detail1', function(req, res){
+    
+    console.log(req.body);
 });
 
 

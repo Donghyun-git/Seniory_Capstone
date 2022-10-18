@@ -21,7 +21,6 @@ router.get("/morework", ctrl.output.morework);
 router.get("/mypage", ctrl.output.mypage);
 router.get("/workshare", ctrl.output.workshare);
 
-
 // 유저
 router.get("/signup_p", user.output.signup_p);
 router.get("/index_p", user.output.index_p);

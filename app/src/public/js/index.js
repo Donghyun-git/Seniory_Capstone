@@ -30,6 +30,38 @@ let signUp = document.querySelector('.sign-up');
 		radioArea.innerText = event.target.value;
 		console.log(radioArea.textContent)
 		}
+	
+		/* 제출 */
+	let memo = document.getElementById("memo");
+	let book = document.getElementById("chk01");
+	let cloth = document.getElementById("chk02");
+	let wash = document.getElementById("chk03");
+	let tooth = document.getElementById("chk04");
+	let eat = document.getElementById("chk05");
+	let health = document.getElementById("chk06");
+	let facewash = document.getElementById("chk07");
+	let picnic = document.getElementById("chk08");
+
+	function submit(){
+		const req = {
+			memo: memo.value,
+			book: book.checked,
+			cloth: cloth.checked,
+			wash: wash.checked,
+			tooth: tooth.checked,
+			eat: eat.checked,
+			health: health.checked,
+			facewash: facewash.checked,
+			picnic: picnic.checked,
+		}
+		fetch('/detail1', {
+			method: 'post',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(req),
+		})
+	}
 
 
 
