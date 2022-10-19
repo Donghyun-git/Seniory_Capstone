@@ -32,27 +32,18 @@ let signUp = document.querySelector('.sign-up');
 		}
 	
 		/* 제출 */
-	let memo = document.getElementById("memo");
-	let book = document.getElementById("chk01");
-	let cloth = document.getElementById("chk02");
-	let wash = document.getElementById("chk03");
-	let tooth = document.getElementById("chk04");
-	let eat = document.getElementById("chk05");
-	let health = document.getElementById("chk06");
-	let facewash = document.getElementById("chk07");
-	let picnic = document.getElementById("chk08");
-
+	
 	function submit(){
+		let checkedList = document.querySelectorAll('input[name="todo"]:checked')
+		let values = [];
+		let id = document.getElementById('querystring');
+		checkedList.forEach((e) => {
+			values.push(e.value);
+		});
 		const req = {
 			memo: memo.value,
-			book: book.checked,
-			cloth: cloth.checked,
-			wash: wash.checked,
-			tooth: tooth.checked,
-			eat: eat.checked,
-			health: health.checked,
-			facewash: facewash.checked,
-			picnic: picnic.checked,
+			list: values,
+			id: id.textContent,
 		}
 		fetch('/detail1', {
 			method: 'post',
@@ -60,7 +51,9 @@ let signUp = document.querySelector('.sign-up');
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify(req),
-		})
+		});
+		alert("저장되었습니다!");
+		window.location='/list1'
 	}
 
 
