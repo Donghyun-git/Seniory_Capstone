@@ -56,6 +56,29 @@ let signUp = document.querySelector('.sign-up');
 		window.location='/list1'
 	}
 
+	function shareSubmit(){
+		let checkedList = document.querySelectorAll('input[name="todo"]:checked')
+		let values = [];
+		let id = document.getElementById('querystring');
+		checkedList.forEach((e) => {
+			values.push(e.value);
+		});
+		const req = {
+			memo: memo.value,
+			list: values,
+			id: id.textContent,
+		}
+		fetch('/detail2', {
+			method: 'post',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(req),
+		});
+		alert("저장되었습니다!");
+		window.location='/list1'
+	}
+
 
 
       

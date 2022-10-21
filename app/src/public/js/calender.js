@@ -1,5 +1,11 @@
 let date = new Date();
 
+let y = date.getFullYear();
+let m = date.getMonth();
+let d = date.getDay();
+
+document.getElementById('dayTitle').textContent = `${y}년 ${m + 1}월 ${d + 16}일`;
+
 const renderCalender = () => {
 const viewYear = date.getFullYear();
 const viewMonth = date.getMonth();
@@ -39,7 +45,7 @@ dates.forEach((date, i) => {
                       ? 'this'
                       : 'other';
 
-    dates[i] = `<div class="date"><div class="c-1"></div><span class="${condition}" onclick="listRendering(event)">${date}</span></div>`;
+    dates[i] = `<div class="date"><div class="c-1"></div><span class="${condition}">${date}</span></div>`;
   })
 
 document.querySelector('.dates').innerHTML = dates.join(''); 

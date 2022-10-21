@@ -90,3 +90,20 @@ let month = document.querySelector('.month');
     document.querySelector('.ws-plan').innerHTML = resultHTML;
     dayTitle.innerHTML = dayHTML;
 };
+
+let share = () => {
+  const req = {
+    share: true,
+  }
+  fetch('/workshare1', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(req),
+  });
+  alert("인수인계 되었습니다!");
+  window.location='/list1';
+}
+
+
