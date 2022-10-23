@@ -23,6 +23,9 @@ const output = {
     mypage_p: (req, res) => {
         res.render("home/mypage_p");
     },
+    detail_info: (req, res) => {
+        res.render("home/detail-info");
+    },
 };
 
 

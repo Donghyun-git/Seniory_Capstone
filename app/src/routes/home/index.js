@@ -28,6 +28,7 @@ router.get("/manage", user.output.manage);
 router.get("/map", user.output.map);
 router.get("/modify_p", user.output.modify_p);
 router.get("/mypage_p", user.output.mypage_p);
+router.get("/detail-info", user.output.detail_info);
 
 
 module.exports = router;

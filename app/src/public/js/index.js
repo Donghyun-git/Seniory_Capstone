@@ -1,5 +1,4 @@
 "use strict";
-
 /* 라디오버튼 선택여부 회원가입 페이지 이동 */
 
 let manage = document.getElementById('rdo01');
@@ -31,7 +30,7 @@ let signUp = document.querySelector('.sign-up');
 		console.log(radioArea.textContent)
 		}
 	
-		/* 제출 */
+		/* 인수인계 */
 	
 	function submit(){
 		let checkedList = document.querySelectorAll('input[name="todo"]:checked')
@@ -77,6 +76,21 @@ let signUp = document.querySelector('.sign-up');
 		});
 		alert("저장되었습니다!");
 		window.location='/list1'
+	}
+
+	/* 맵 api */
+	function map() {
+		const req = {
+			test: "test",
+		};
+		fetch('/map1', {
+			method: 'get',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(req),
+		});
+		window.location='/map1';
 	}
 
 

@@ -38,6 +38,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use("/", home); // use -> 미들웨어 등록해주는 메소드.
+
+//세션 객체
 app.use(session({
     secret              : 'ABCD1234ABAB!@',
     resave              : false,
@@ -693,8 +695,8 @@ app.get('/detail1', function(req, res){
                             <ul id="gnb-list">
                                 <li><a href="list1">오늘업무</a></li>
                                 <li><a href="workshare1">인수인계</a></li>
-                                <li><a href="manage">어르신 관리</a></li>
-                                <li><a href="mypage">마이페이지</a></li>
+                                <li><a href="manage1">어르신 관리</a></li>
+                                <li><a href="mypage1">마이페이지</a></li>
                                 <li><a href="/">로그아웃</a></li>
                             </ul>
                         </div>
@@ -712,7 +714,7 @@ app.get('/detail1', function(req, res){
                                         <ul class="detail-info__btn">
                                             <li><button class="detail-info__call" onclick="location.href='tel:010-8300-7586'">전화걸기</button></li>
                                             <li><button class="detail-info__family" onclick="location.href='tel:010-8300-7586'">보호자연락</button></li>
-                                            <li><button class="detail-info__location" onclick="location.href='map'">위치정보</button></li>
+                                            <li><button class="detail-info__location" onclick="map()">위치정보</button></li>
                                         </ul>
                                         <div class="detail-info__complete">
                                             <button>방문완료</button>
@@ -802,7 +804,7 @@ app.get('/detail1', function(req, res){
                     <li><a href="list1">오늘업무</a></li>
                     <li><a href="workshare1">인수인계</a></li>
                     <li><a href="manage1">어르신 관리</a></li>
-                    <li><a href="mypage">마이페이지</a></li>
+                    <li><a href="mypage1">마이페이지</a></li>
                     <li><a href="/">로그아웃</a></li>
                 </ul>
             </div>
@@ -820,7 +822,7 @@ app.get('/detail1', function(req, res){
                             <ul class="detail-info__btn">
                                 <li><button class="detail-info__call" onclick="location.href='tel:010-8300-7586'">전화걸기</button></li>
                                 <li><button class="detail-info__family" onclick="location.href='tel:010-8300-7586'">보호자연락</button></li>
-                                <li><button class="detail-info__location" onclick="location.href='map'">위치정보</button></li>
+                                <li><button class="detail-info__location" onclick="map()">위치정보</button></li>
                             </ul>
                             <div class="detail-info__complete">
                                 <button>방문완료</button>
@@ -910,7 +912,7 @@ app.get('/detail1', function(req, res){
                     <li><a href="list1">오늘업무</a></li>
                     <li><a href="workshare1">인수인계</a></li>
                     <li><a href="manage1">어르신 관리</a></li>
-                    <li><a href="mypage">마이페이지</a></li>
+                    <li><a href="mypage1">마이페이지</a></li>
                     <li><a href="/">로그아웃</a></li>
                 </ul>
             </div>
@@ -928,7 +930,7 @@ app.get('/detail1', function(req, res){
                             <ul class="detail-info__btn">
                                 <li><button class="detail-info__call" onclick="location.href='tel:010-8300-7586'">전화걸기</button></li>
                                 <li><button class="detail-info__family" onclick="location.href='tel:010-8300-7586'">보호자연락</button></li>
-                                <li><button class="detail-info__location" onclick="location.href='map'">위치정보</button></li>
+                                <li><button class="detail-info__location" onclick="location.href='map1?id=${req.query.id}'">위치정보</button></li>
                             </ul>
                             <div class="detail-info__complete">
                                 <button>방문완료</button>
@@ -994,233 +996,14 @@ app.get('/detail1', function(req, res){
     };
   });
 
-  //상세페이지(추가업무)
-  app.get('/detail2', function(req, res){
-    console.log(req.body);
-    for(let i=0; i<share1.length; i++){
-        if(share1[i].shareID == req.query.id){
-            if(share1[i].todo == null){
-                var output = `
-                <!DOCTYPE HTML>
-                    <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
-                    <head>
-                    <meta charset="utf-8">
-                    <meta name="HandheldFriendly" content="True">
-                    <meta name="MobileOptimized" content="320">
-                    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
-                    <meta name="mobile-web-app-capable" content="yes">	
-                    <meta name="apple-mobile-web-app-capable" content="yes">
-                    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-                    <meta name="format-detection" content="telephone=no">
-                    <meta name="Robots" content="ALL" />
-                    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                    <title>생활관리사 맞춤 서비스</title>
-                    <link rel="stylesheet" type="text/css" href="css/style.css">
-                    </head>
-                    <body>
-                    <h1 id="title">생활관리사 맞춤 서비스</h1>
-
-
-                    <div id="wrap">
-                        <div id="gnb">
-                            <a href="list1" id="gnb-back">뒤로</a>
-                            <h2 id="gnb-title">${share1[i].pname} 어르신</h2>
-                            <button id="gnb-menu"><span>메뉴</span></button>
-                            <ul id="gnb-list">
-                                <li><a href="list1">오늘업무</a></li>
-                                <li><a href="workshare1">인수인계</a></li>
-                                <li><a href="manage">어르신 관리</a></li>
-                                <li><a href="mypage">마이페이지</a></li>
-                                <li><a href="/">로그아웃</a></li>
-                            </ul>
-                        </div>
-                        <div id="contents">
-                            <div id="inner">
-                                
-                                <div class="list-myinfo">
-                                    <h1 id="querystring" style="display: none;">${req.query.id}</h1>
-                                    <div class="detail-info">
-                                        <em class="detail-info__thumb" style="background:url('../img/profile_sample.jpg')no-repeat center center / cover;"></em>
-                                        <div class="detail-info__name">
-                                            <h5><b>${share1[i].pname}</b>어르신</h5>
-                                            <p>${share1[i].padr} / ${share1[i].page} / ${share1[i].sex}</p>
-                                        </div>
-                                        <ul class="detail-info__btn">
-                                            <li><button class="detail-info__call" onclick="location.href='tel:010-8300-7586'">전화걸기</button></li>
-                                            <li><button class="detail-info__family" onclick="location.href='tel:010-8300-7586'">보호자연락</button></li>
-                                            <li><button class="detail-info__location" onclick="location.href='map'">위치정보</button></li>
-                                        </ul>
-                                        <div class="detail-info__complete">
-                                            <button>방문완료</button>
-                                            <!-- <button class="active">방문완료</button> -->
-                                        </div>
-                                    </div>
-                                </div>
-
-                            
-                                <div class="detail-title">
-                                    <h5>업무 계획</h5>
-                                </div>
-
-                                <ul class="detail-plan">
-                                    <li><input type="checkbox" name="todo" id="chk01" value="책읽기"/><label for="book">책 읽기</label></li>
-                                    <li><input type="checkbox" name="todo" id="chk02" value="환복"/><label for="chk02">환복</label></li>
-                                    <li><input type="checkbox" name="todo" id="chk03" value="목욕하기"/><label for="chk03">목욕 하기</label></li>
-                                    <li><input type="checkbox" name="todo" id="chk04" value="구강관리"/><label for="chk04">구강 관리</label></li>
-                                    <li><input type="checkbox" name="todo" id="chk05" value="식사하기"/><label for="chk05">식사 하기</label></li>
-                                    <li><input type="checkbox" name="todo" id="chk06" value="신체기능유지"/><label for="chk06">신체 기능 유지</label></li>
-                                    <li><input type="checkbox" name="todo" id="chk07" value="세면도움"/><label for="chk07">세면도움</label></li>
-                                    <li><input type="checkbox" name="todo" id="chk08" value="외출동행"/><label for="chk08">외출 동행</label></li>
-                                </ul>
-                                <div class="detail-title">
-                                    <h5>업무 목록</h5>               
-                                </div>
-                                <p class="mt10" style="text-align:center; font-size: 16px; ">등록된 업무가 없습니다!</p>
-
-                                <div class="detail-title">
-                                    <h5>메모</h5>
-                                </div>
-                                    <input type="textarea" class="detail-memo__textarea" name="memo" id="memo" cols="30" rows="10" class="detail-memo__textarea" placeholder="특이사항이나 메모 내용을 입력해주세요.">
-                                    
-                                    <div class="detail-memo__submit">
-                                        <p><b>0</b> / 300자</p>
-                                        <button onclick="shareSubmit()">저장하기</button>
-                                    </div>
-                                
-                                
-                            
-
-                                <p class="page-copy">Copyright &copy; Dongs All Rights Reserved.</p>
-
-                            </div><!-- inner -->
-                        </div><!-- content -->
-                    </div><!-- wrap -->
-
-                    </body>
-
-
-                    <!-- JS -->
-                    <script src="js/jquery-2.2.1.min.js"></script>
-                    <script src="js/placeholders.min.js"></script>
-                    <script src="js/common.js"></script>
-                    <script src="js/index.js"></script>
-
-                    </html>
-                `
-            } else if (share1[i].memo==null) {
-                `
-                <!DOCTYPE HTML>
-                    <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
-                    <head>
-                    <meta charset="utf-8">
-                    <meta name="HandheldFriendly" content="True">
-                    <meta name="MobileOptimized" content="320">
-                    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
-                    <meta name="mobile-web-app-capable" content="yes">	
-                    <meta name="apple-mobile-web-app-capable" content="yes">
-                    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-                    <meta name="format-detection" content="telephone=no">
-                    <meta name="Robots" content="ALL" />
-                    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                    <title>생활관리사 맞춤 서비스</title>
-                    <link rel="stylesheet" type="text/css" href="css/style.css">
-                    </head>
-                    <body>
-                    <h1 id="title">생활관리사 맞춤 서비스</h1>
-
-
-                    <div id="wrap">
-                        <div id="gnb">
-                            <a href="list1" id="gnb-back">뒤로</a>
-                            <h2 id="gnb-title">${share1[i].pname} 어르신</h2>
-                            <button id="gnb-menu"><span>메뉴</span></button>
-                            <ul id="gnb-list">
-                                <li><a href="list1">오늘업무</a></li>
-                                <li><a href="workshare1">인수인계</a></li>
-                                <li><a href="manage">어르신 관리</a></li>
-                                <li><a href="mypage">마이페이지</a></li>
-                                <li><a href="/">로그아웃</a></li>
-                            </ul>
-                        </div>
-                        <div id="contents">
-                            <div id="inner">
-                                
-                                <div class="list-myinfo">
-                                    <h1 id="querystring" style="display: none;">${req.query.id}</h1>
-                                    <div class="detail-info">
-                                        <em class="detail-info__thumb" style="background:url('../img/profile_sample.jpg')no-repeat center center / cover;"></em>
-                                        <div class="detail-info__name">
-                                            <h5><b>${share1[i].pname}</b>어르신</h5>
-                                            <p>${share1[i].padr} / ${share1[i].page} / ${share1[i].sex}</p>
-                                        </div>
-                                        <ul class="detail-info__btn">
-                                            <li><button class="detail-info__call" onclick="location.href='tel:010-8300-7586'">전화걸기</button></li>
-                                            <li><button class="detail-info__family" onclick="location.href='tel:010-8300-7586'">보호자연락</button></li>
-                                            <li><button class="detail-info__location" onclick="location.href='map'">위치정보</button></li>
-                                        </ul>
-                                        <div class="detail-info__complete">
-                                            <button>방문완료</button>
-                                            <!-- <button class="active">방문완료</button> -->
-                                        </div>
-                                    </div>
-                                </div>
-
-                            
-                                <div class="detail-title">
-                                    <h5>업무 계획</h5>
-                                </div>
-
-                                <ul class="detail-plan">
-                                    <li><input type="checkbox" name="todo" id="chk01" value="책읽기"/><label for="book">책 읽기</label></li>
-                                    <li><input type="checkbox" name="todo" id="chk02" value="환복"/><label for="chk02">환복</label></li>
-                                    <li><input type="checkbox" name="todo" id="chk03" value="목욕하기"/><label for="chk03">목욕 하기</label></li>
-                                    <li><input type="checkbox" name="todo" id="chk04" value="구강관리"/><label for="chk04">구강 관리</label></li>
-                                    <li><input type="checkbox" name="todo" id="chk05" value="식사하기"/><label for="chk05">식사 하기</label></li>
-                                    <li><input type="checkbox" name="todo" id="chk06" value="신체기능유지"/><label for="chk06">신체 기능 유지</label></li>
-                                    <li><input type="checkbox" name="todo" id="chk07" value="세면도움"/><label for="chk07">세면도움</label></li>
-                                    <li><input type="checkbox" name="todo" id="chk08" value="외출동행"/><label for="chk08">외출 동행</label></li>
-                                </ul>
-                                <div class="detail-title">
-                                    <h5>업무 목록</h5>               
-                                </div>
-                                <p class="mt10" style="text-align:center; font-size: 16px; ">${share1[i].todo}</p>
-
-                                <div class="detail-title">
-                                    <h5>메모</h5>
-                                </div>
-                                    <input type="textarea" class="detail-memo__textarea" name="memo" id="memo" cols="30" rows="10" class="detail-memo__textarea" placeholder="특이사항이나 메모 내용을 입력해주세요.">
-                                    
-                                    <div class="detail-memo__submit">
-                                        <p><b>0</b> / 300자</p>
-                                        <button onclick="shareSubmit()">저장하기</button>
-                                    </div>
-                                
-                                
-                            
-
-                                <p class="page-copy">Copyright &copy; Dongs All Rights Reserved.</p>
-
-                            </div><!-- inner -->
-                        </div><!-- content -->
-                    </div><!-- wrap -->
-
-                    </body>
-
-
-                    <!-- JS -->
-                    <script src="js/jquery-2.2.1.min.js"></script>
-                    <script src="js/placeholders.min.js"></script>
-                    <script src="js/common.js"></script>
-                    <script src="js/index.js"></script>
-
-                    </html>
-                `
-
-            }
-            
-            else {
-                var output = `
-                <!DOCTYPE HTML>
+//상세페이지(추가업무)
+app.get('/detail2', function(req, res){
+console.log(req.body);
+for(let i=0; i<share1.length; i++){
+    if(share1[i].shareID == req.query.id){
+        if(share1[i].todo == null){
+            var output = `
+            <!DOCTYPE HTML>
                 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
                 <head>
                 <meta charset="utf-8">
@@ -1238,8 +1021,8 @@ app.get('/detail1', function(req, res){
                 </head>
                 <body>
                 <h1 id="title">생활관리사 맞춤 서비스</h1>
-        
-        
+
+
                 <div id="wrap">
                     <div id="gnb">
                         <a href="list1" id="gnb-back">뒤로</a>
@@ -1249,7 +1032,7 @@ app.get('/detail1', function(req, res){
                             <li><a href="list1">오늘업무</a></li>
                             <li><a href="workshare1">인수인계</a></li>
                             <li><a href="manage1">어르신 관리</a></li>
-                            <li><a href="mypage">마이페이지</a></li>
+                            <li><a href="mypage1">마이페이지</a></li>
                             <li><a href="/">로그아웃</a></li>
                         </ul>
                     </div>
@@ -1267,7 +1050,7 @@ app.get('/detail1', function(req, res){
                                     <ul class="detail-info__btn">
                                         <li><button class="detail-info__call" onclick="location.href='tel:010-8300-7586'">전화걸기</button></li>
                                         <li><button class="detail-info__family" onclick="location.href='tel:010-8300-7586'">보호자연락</button></li>
-                                        <li><button class="detail-info__location" onclick="location.href='map'">위치정보</button></li>
+                                        <li><button class="detail-info__location" onclick="map()">위치정보</button></li>
                                     </ul>
                                     <div class="detail-info__complete">
                                         <button>방문완료</button>
@@ -1275,12 +1058,120 @@ app.get('/detail1', function(req, res){
                                     </div>
                                 </div>
                             </div>
-        
+
                         
                             <div class="detail-title">
                                 <h5>업무 계획</h5>
                             </div>
-        
+
+                            <ul class="detail-plan">
+                                <li><input type="checkbox" name="todo" id="chk01" value="책읽기"/><label for="book">책 읽기</label></li>
+                                <li><input type="checkbox" name="todo" id="chk02" value="환복"/><label for="chk02">환복</label></li>
+                                <li><input type="checkbox" name="todo" id="chk03" value="목욕하기"/><label for="chk03">목욕 하기</label></li>
+                                <li><input type="checkbox" name="todo" id="chk04" value="구강관리"/><label for="chk04">구강 관리</label></li>
+                                <li><input type="checkbox" name="todo" id="chk05" value="식사하기"/><label for="chk05">식사 하기</label></li>
+                                <li><input type="checkbox" name="todo" id="chk06" value="신체기능유지"/><label for="chk06">신체 기능 유지</label></li>
+                                <li><input type="checkbox" name="todo" id="chk07" value="세면도움"/><label for="chk07">세면도움</label></li>
+                                <li><input type="checkbox" name="todo" id="chk08" value="외출동행"/><label for="chk08">외출 동행</label></li>
+                            </ul>
+                            <div class="detail-title">
+                                <h5>업무 목록</h5>               
+                            </div>
+                            <p class="mt10" style="text-align:center; font-size: 16px; ">등록된 업무가 없습니다!</p>
+
+                            <div class="detail-title">
+                                <h5>메모</h5>
+                            </div>
+                                <input type="textarea" class="detail-memo__textarea" name="memo" id="memo" cols="30" rows="10" class="detail-memo__textarea" placeholder="특이사항이나 메모 내용을 입력해주세요.">
+                                
+                                <div class="detail-memo__submit">
+                                    <p><b>0</b> / 300자</p>
+                                    <button onclick="shareSubmit()">저장하기</button>
+                                </div>
+                            
+                            
+                        
+
+                            <p class="page-copy">Copyright &copy; Dongs All Rights Reserved.</p>
+
+                        </div><!-- inner -->
+                    </div><!-- content -->
+                </div><!-- wrap -->
+
+                </body>
+
+
+                <!-- JS -->
+                <script src="js/jquery-2.2.1.min.js"></script>
+                <script src="js/placeholders.min.js"></script>
+                <script src="js/common.js"></script>
+                <script src="js/index.js"></script>
+
+                </html>
+            `
+        } else if (share1[i].memo==null) {
+            `
+            <!DOCTYPE HTML>
+                <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+                <head>
+                <meta charset="utf-8">
+                <meta name="HandheldFriendly" content="True">
+                <meta name="MobileOptimized" content="320">
+                <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+                <meta name="mobile-web-app-capable" content="yes">	
+                <meta name="apple-mobile-web-app-capable" content="yes">
+                <meta name="apple-mobile-web-app-status-bar-style" content="black">
+                <meta name="format-detection" content="telephone=no">
+                <meta name="Robots" content="ALL" />
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <title>생활관리사 맞춤 서비스</title>
+                <link rel="stylesheet" type="text/css" href="css/style.css">
+                </head>
+                <body>
+                <h1 id="title">생활관리사 맞춤 서비스</h1>
+
+
+                <div id="wrap">
+                    <div id="gnb">
+                        <a href="list1" id="gnb-back">뒤로</a>
+                        <h2 id="gnb-title">${share1[i].pname} 어르신</h2>
+                        <button id="gnb-menu"><span>메뉴</span></button>
+                        <ul id="gnb-list">
+                            <li><a href="list1">오늘업무</a></li>
+                            <li><a href="workshare1">인수인계</a></li>
+                            <li><a href="manage1">어르신 관리</a></li>
+                            <li><a href="mypage1">마이페이지</a></li>
+                            <li><a href="/">로그아웃</a></li>
+                        </ul>
+                    </div>
+                    <div id="contents">
+                        <div id="inner">
+                            
+                            <div class="list-myinfo">
+                                <h1 id="querystring" style="display: none;">${req.query.id}</h1>
+                                <div class="detail-info">
+                                    <em class="detail-info__thumb" style="background:url('../img/profile_sample.jpg')no-repeat center center / cover;"></em>
+                                    <div class="detail-info__name">
+                                        <h5><b>${share1[i].pname}</b>어르신</h5>
+                                        <p>${share1[i].padr} / ${share1[i].page} / ${share1[i].sex}</p>
+                                    </div>
+                                    <ul class="detail-info__btn">
+                                        <li><button class="detail-info__call" onclick="location.href='tel:010-8300-7586'">전화걸기</button></li>
+                                        <li><button class="detail-info__family" onclick="location.href='tel:010-8300-7586'">보호자연락</button></li>
+                                        <li><button class="detail-info__location" onclick="map()">위치정보</button></li>
+                                    </ul>
+                                    <div class="detail-info__complete">
+                                        <button>방문완료</button>
+                                        <!-- <button class="active">방문완료</button> -->
+                                    </div>
+                                </div>
+                            </div>
+
+                        
+                            <div class="detail-title">
+                                <h5>업무 계획</h5>
+                            </div>
+
                             <ul class="detail-plan">
                                 <li><input type="checkbox" name="todo" id="chk01" value="책읽기"/><label for="book">책 읽기</label></li>
                                 <li><input type="checkbox" name="todo" id="chk02" value="환복"/><label for="chk02">환복</label></li>
@@ -1295,11 +1186,11 @@ app.get('/detail1', function(req, res){
                                 <h5>업무 목록</h5>               
                             </div>
                             <p class="mt10" style="text-align:center; font-size: 16px; ">${share1[i].todo}</p>
-        
+
                             <div class="detail-title">
                                 <h5>메모</h5>
                             </div>
-                                <input type="textarea" class="detail-memo__textarea" value="${share1[i].memo}" name="memo" id="memo" cols="30" rows="10" class="detail-memo__textarea" placeholder="특이사항이나 메모 내용을 입력해주세요.">
+                                <input type="textarea" class="detail-memo__textarea" name="memo" id="memo" cols="30" rows="10" class="detail-memo__textarea" placeholder="특이사항이나 메모 내용을 입력해주세요.">
                                 
                                 <div class="detail-memo__submit">
                                     <p><b>0</b> / 300자</p>
@@ -1308,29 +1199,229 @@ app.get('/detail1', function(req, res){
                             
                             
                         
-        
+
                             <p class="page-copy">Copyright &copy; Dongs All Rights Reserved.</p>
-        
+
                         </div><!-- inner -->
                     </div><!-- content -->
                 </div><!-- wrap -->
-        
+
                 </body>
-        
-        
+
+
                 <!-- JS -->
                 <script src="js/jquery-2.2.1.min.js"></script>
                 <script src="js/placeholders.min.js"></script>
                 <script src="js/common.js"></script>
                 <script src="js/index.js"></script>
-        
+
                 </html>
-                `;
-            }
-            res.send(output);
+            `
         }
+
+        else {
+            var output = `
+            <!DOCTYPE HTML>
+            <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+            <head>
+            <meta charset="utf-8">
+            <meta name="HandheldFriendly" content="True">
+            <meta name="MobileOptimized" content="320">
+            <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+            <meta name="mobile-web-app-capable" content="yes">	
+            <meta name="apple-mobile-web-app-capable" content="yes">
+            <meta name="apple-mobile-web-app-status-bar-style" content="black">
+            <meta name="format-detection" content="telephone=no">
+            <meta name="Robots" content="ALL" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <title>생활관리사 맞춤 서비스</title>
+            <link rel="stylesheet" type="text/css" href="css/style.css">
+            </head>
+            <body>
+            <h1 id="title">생활관리사 맞춤 서비스</h1>
+    
+    
+            <div id="wrap">
+                <div id="gnb">
+                    <a href="list1" id="gnb-back">뒤로</a>
+                    <h2 id="gnb-title">${share1[i].pname} 어르신</h2>
+                    <button id="gnb-menu"><span>메뉴</span></button>
+                    <ul id="gnb-list">
+                        <li><a href="list1">오늘업무</a></li>
+                        <li><a href="workshare1">인수인계</a></li>
+                        <li><a href="manage1">어르신 관리</a></li>
+                        <li><a href="mypage1">마이페이지</a></li>
+                        <li><a href="/">로그아웃</a></li>
+                    </ul>
+                </div>
+                <div id="contents">
+                    <div id="inner">
+                        
+                        <div class="list-myinfo">
+                            <h1 id="querystring" style="display: none;">${req.query.id}</h1>
+                            <div class="detail-info">
+                                <em class="detail-info__thumb" style="background:url('../img/profile_sample.jpg')no-repeat center center / cover;"></em>
+                                <div class="detail-info__name">
+                                    <h5><b>${share1[i].pname}</b>어르신</h5>
+                                    <p>${share1[i].padr} / ${share1[i].page} / ${share1[i].sex}</p>
+                                </div>
+                                <ul class="detail-info__btn">
+                                    <li><button class="detail-info__call" onclick="location.href='tel:010-8300-7586'">전화걸기</button></li>
+                                    <li><button class="detail-info__family" onclick="location.href='tel:010-8300-7586'">보호자연락</button></li>
+                                    <li><button class="detail-info__location" onclick="map()">위치정보</button></li>
+                                </ul>
+                                <div class="detail-info__complete">
+                                    <button>방문완료</button>
+                                    <!-- <button class="active">방문완료</button> -->
+                                </div>
+                            </div>
+                        </div>
+    
+                    
+                        <div class="detail-title">
+                            <h5>업무 계획</h5>
+                        </div>
+    
+                        <ul class="detail-plan">
+                            <li><input type="checkbox" name="todo" id="chk01" value="책읽기"/><label for="book">책 읽기</label></li>
+                            <li><input type="checkbox" name="todo" id="chk02" value="환복"/><label for="chk02">환복</label></li>
+                            <li><input type="checkbox" name="todo" id="chk03" value="목욕하기"/><label for="chk03">목욕 하기</label></li>
+                            <li><input type="checkbox" name="todo" id="chk04" value="구강관리"/><label for="chk04">구강 관리</label></li>
+                            <li><input type="checkbox" name="todo" id="chk05" value="식사하기"/><label for="chk05">식사 하기</label></li>
+                            <li><input type="checkbox" name="todo" id="chk06" value="신체기능유지"/><label for="chk06">신체 기능 유지</label></li>
+                            <li><input type="checkbox" name="todo" id="chk07" value="세면도움"/><label for="chk07">세면도움</label></li>
+                            <li><input type="checkbox" name="todo" id="chk08" value="외출동행"/><label for="chk08">외출 동행</label></li>
+                        </ul>
+                        <div class="detail-title">
+                            <h5>업무 목록</h5>               
+                        </div>
+                        <p class="mt10" style="text-align:center; font-size: 16px; ">${share1[i].todo}</p>
+    
+                        <div class="detail-title">
+                            <h5>메모</h5>
+                        </div>
+                            <input type="textarea" class="detail-memo__textarea" value="${share1[i].memo}" name="memo" id="memo" cols="30" rows="10" class="detail-memo__textarea" placeholder="특이사항이나 메모 내용을 입력해주세요.">
+                            
+                            <div class="detail-memo__submit">
+                                <p><b>0</b> / 300자</p>
+                                <button onclick="shareSubmit()">저장하기</button>
+                            </div>
+                        
+                        
+                    
+    
+                        <p class="page-copy">Copyright &copy; Dongs All Rights Reserved.</p>
+    
+                    </div><!-- inner -->
+                </div><!-- content -->
+            </div><!-- wrap -->
+    
+            </body>
+    
+    
+            <!-- JS -->
+            <script src="js/jquery-2.2.1.min.js"></script>
+            <script src="js/placeholders.min.js"></script>
+            <script src="js/common.js"></script>
+            <script src="js/index.js"></script>
+    
+            </html>
+            `;
+        }
+        res.send(output);
     }
-  });
+}
+});
+
+// 어르신 거주지 지도 마커
+app.get('/map1', function(req, res){
+    for(let i=0; i<json1.length; i++){
+        let location = json1[i].info.padr;
+        if(json1[i].id == req.query.id){
+            var output = `
+                <!DOCTYPE HTML>
+            <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+            <head>
+                <meta charset="utf-8">
+                <meta name="HandheldFriendly" content="True">
+                <meta name="MobileOptimized" content="320">
+                <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+                <meta name="mobile-web-app-capable" content="yes">
+                <meta name="apple-mobile-web-app-capable" content="yes">
+                <meta name="apple-mobile-web-app-status-bar-style" content="black">
+                <meta name="format-detection" content="telephone=no">
+                <meta name="Robots" content="ALL" />
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <title>생활관리사 맞춤 서비스</title>
+                <link rel="stylesheet" type="text/css" href="css/style.css">
+            </head>
+
+            <body>
+                <h1 id="title">생활관리사 맞춤 서비스</h1>
+
+
+                <div id="wrap">
+                    <div id="gnb">
+                        <h2 id="gnb-title">위치정보</h2>
+                        <button id="gnb-menu"><span>메뉴</span></button>
+                        <ul id="gnb-list">
+                            <li><a href="list">오늘업무</a></li>
+                            <li><a href="calender">종합업무</a></li>
+                            <li><a href="workshare">인수인계</a></li>
+                            <li><a href="manage">어르신 관리</a></li>
+                            <li><a href="mypage">마이페이지</a></li>
+                            <li><a href="/">로그아웃</a></li>
+                        </ul>
+                    </div>
+                    <div id="contents">
+                        <div id="map-inner">
+                            <div id="map" style="width:100%;height:800px;">
+
+                            </div>
+                        </div>
+                    </div><!-- inner -->
+                </div><!-- content -->
+            </div><!-- wrap -->
+
+
+
+
+                <!-- JS -->
+                <script src="js/jquery-2.2.1.min.js"></script>
+                <script src="js/placeholders.min.js"></script>
+                <script src="js/common.js"></script>
+                <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=se5rcmbh22&submodules=geocoder"></script>
+                <script>
+                    
+                    naver.maps.Service.fromAddrToCoord({ address: '${json1[i].info.padr}' }, function(status, response) {
+                        if (status === naver.maps.Service.Status.ERROR) {
+                            return alert('Something wrong!');
+                        }
+
+                        var map = new naver.maps.Map('map', {
+                            center: new naver.maps.LatLng(response.result.items[0].point.y, response.result.items[0].point.x),
+                            zoom: 18
+                            });
+
+                        var marker = new naver.maps.Marker({
+                            position: new naver.maps.LatLng(response.result.items[0].point.y, response.result.items[0].point.x),
+                            map: map
+                        });
+                    });
+                    
+
+
+
+                
+                </script>
+            </body>
+
+            </html>`;
+            res.send(output);
+        };
+    };
+});
 
 //메모 및 할일 등록(고정업무)
 app.post('/detail1', function(req, res){
@@ -1681,6 +1772,7 @@ app.get('/deletelist1', function(req, res){
 //로그인 성공(보호자)
 app.get("/mypage_p1", function(req, res){
     let output ="";
+    console.log(req.session);
     if(req.session.name && req.session.sname && req.session.pnum){
         output += `<!DOCTYPE HTML>
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
@@ -1709,11 +1801,7 @@ app.get("/mypage_p1", function(req, res){
                     <h2 id="gnb-title">마이페이지</h2>
                     <button id="gnb-menu"><span>메뉴</span></button>
                     <ul id="gnb-list">
-                        <li><a href="list">오늘업무</a></li>
-                        <li><a href="calender">종합업무</a></li>
-                        <li><a href="workshare1">인수인계</a></li>
-                        <li><a href="manage1">어르신 관리</a></li>
-                        <li><a href="mypage">마이페이지</a></li>
+                        <li><a href="mypage_p">마이페이지</a></li>
                         <li><a href="/">로그아웃</a></li>
                     </ul>
                 </div>
@@ -1729,7 +1817,8 @@ app.get("/mypage_p1", function(req, res){
                                 </dl>        
                         <div class="mypage-list">
                             <ul>
-                               <li><a href="modify">회원정보수정</a></li>
+                               <li><a href="modify_p1">회원정보수정</a></li>
+                               <li><a href="/detail_info1">관리사 업무 현황</a></li>
                                <li><a href="#">설정</a></li>
                                <li><a href="/">로그아웃</a></li>
                                <li><a href="tel:010-8300-7586">1:1 전화문의</a></li>
@@ -1755,6 +1844,308 @@ app.get("/mypage_p1", function(req, res){
         </html>`;
         res.send(output);
     }
+    
+});
+
+//관리사 업무 현황(보호자)
+app.get("/detail_info1", function(req, res){
+    connection.query(`SELECT * FROM patient WHERE pname = '${req.session.sname}' and proName = '${req.session.name}'`, function(error, results, fields){
+        if (error) throw error;
+        
+        if(results[0].todo == null && results[0].memo == null){
+            let output=`
+            <!DOCTYPE HTML>
+        <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+        
+        <head>
+            <meta charset="utf-8">
+            <meta name="HandheldFriendly" content="True">
+            <meta name="MobileOptimized" content="320">
+            <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+            <meta name="mobile-web-app-capable" content="yes">
+            <meta name="apple-mobile-web-app-capable" content="yes">
+            <meta name="apple-mobile-web-app-status-bar-style" content="black">
+            <meta name="format-detection" content="telephone=no">
+            <meta name="Robots" content="ALL" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <title>생활관리사 맞춤 서비스</title>
+            <link rel="stylesheet" type="text/css" href="css/style.css">
+        </head>
+        
+        <body>
+            <h1 id="title">생활관리사 맞춤 서비스</h1>
+        
+        
+            <div id="wrap">
+                <div id="gnb">
+                    <h2 id="gnb-title">관리사 업무 현황</h2>
+                    <button id="gnb-menu"><span>메뉴</span></button>
+                    <ul id="gnb-list">
+                        <li><a href="mypage_p1">마이페이지</a></li>
+                        <li><a href="/">로그아웃</a></li>
+                    </ul>
+                </div>
+                <div id="contents">
+                    <div id="inner">
+                        <div class="profile">
+                            <em class="profile-photo" style="background:url('../../img/profile_sample.jpg') no-repeat center center / cover"></em>
+                            <h5 class="mt5"><b>${req.session.sname}</b> 어르신</h5>
+                            <br>
+                        </div>
+                                <dl class="profile-list">
+                                    <dt><i class="fa fa-user" aria-hidden="true"></i>담당 관리사</dt>
+                                    <dd>${results[0].manName}</dd>
+                                </dl>        
+                        <div class="mypage-list mt20" style="text-align: center;">
+                            <dl>
+                               <dt style="font-size: 20px; border-bottom: 1px solid #ddd; padding: 5px 8px; text-align: left;">할 일 리스트</dt>
+                               <dd class="mt20" style="font-size: 16px; padding: 10px 5px;">등록된 할 일이 없습니다!</dd>
+                            </dl>
+                            <dl>
+                                <dt class="mt40" style="font-size: 20px; border-bottom: 1px solid #ddd; padding: 5px 8px; text-align: left;">메모</dt>
+                                <dd class="mt30" style="padding:30px; border: 1px solid #ddd; border-radius: 10px;">등록된 메모가 없습니다!</dd>
+                            </dl>
+                        </div>
+                    </div><!-- inner -->
+                </div><!-- content -->
+            </div><!-- wrap -->
+        
+        
+        
+        
+            <!-- JS -->
+            <script src="js/jquery-2.2.1.min.js"></script>
+            <script src="js/placeholders.min.js"></script>
+            <script src="js/common.js"></script>
+            <script>
+        
+            </script>
+        </body>
+        
+        </html>
+            `;
+            res.send(output);
+        } else if (results[0].todo == null){
+            let output=`
+            <!DOCTYPE HTML>
+        <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+        
+        <head>
+            <meta charset="utf-8">
+            <meta name="HandheldFriendly" content="True">
+            <meta name="MobileOptimized" content="320">
+            <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+            <meta name="mobile-web-app-capable" content="yes">
+            <meta name="apple-mobile-web-app-capable" content="yes">
+            <meta name="apple-mobile-web-app-status-bar-style" content="black">
+            <meta name="format-detection" content="telephone=no">
+            <meta name="Robots" content="ALL" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <title>생활관리사 맞춤 서비스</title>
+            <link rel="stylesheet" type="text/css" href="css/style.css">
+        </head>
+        
+        <body>
+            <h1 id="title">생활관리사 맞춤 서비스</h1>
+        
+        
+            <div id="wrap">
+                <div id="gnb">
+                    <h2 id="gnb-title">관리사 업무 현황</h2>
+                    <button id="gnb-menu"><span>메뉴</span></button>
+                    <ul id="gnb-list">
+                        <li><a href="mypage_p1">마이페이지</a></li>
+                        <li><a href="/">로그아웃</a></li>
+                    </ul>
+                </div>
+                <div id="contents">
+                    <div id="inner">
+                        <div class="profile">
+                            <em class="profile-photo" style="background:url('../../img/profile_sample.jpg') no-repeat center center / cover"></em>
+                            <h5 class="mt5"><b>${req.session.sname}</b> 어르신</h5>
+                            <br>
+                        </div>
+                                <dl class="profile-list">
+                                    <dt><i class="fa fa-user" aria-hidden="true"></i>담당 관리사</dt>
+                                    <dd>${results[0].manName}</dd>
+                                </dl>        
+                        <div class="mypage-list mt20" style="text-align: center;">
+                            <dl>
+                               <dt style="font-size: 20px; border-bottom: 1px solid #ddd; padding: 5px 8px; text-align: left;">할 일 리스트</dt>
+                               <dd class="mt20" style="font-size: 16px; padding: 10px 5px;">등록된 할 일이 없습니다!</dd>
+                            </dl>
+                            <dl>
+                                <dt class="mt40" style="font-size: 20px; border-bottom: 1px solid #ddd; padding: 5px 8px; text-align: left;">메모</dt>
+                                <dd class="mt30" style="padding:30px; border: 1px solid #ddd; border-radius: 10px;">${results[0].memo}</dd>
+                            </dl>
+                        </div>
+                    </div><!-- inner -->
+                </div><!-- content -->
+            </div><!-- wrap -->
+        
+        
+        
+        
+            <!-- JS -->
+            <script src="js/jquery-2.2.1.min.js"></script>
+            <script src="js/placeholders.min.js"></script>
+            <script src="js/common.js"></script>
+            <script>
+        
+            </script>
+        </body>
+        
+        </html>
+            `;
+            res.send(output);
+        } else if(results[0].memo == null){
+            let output=`
+            <!DOCTYPE HTML>
+        <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+        
+        <head>
+            <meta charset="utf-8">
+            <meta name="HandheldFriendly" content="True">
+            <meta name="MobileOptimized" content="320">
+            <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+            <meta name="mobile-web-app-capable" content="yes">
+            <meta name="apple-mobile-web-app-capable" content="yes">
+            <meta name="apple-mobile-web-app-status-bar-style" content="black">
+            <meta name="format-detection" content="telephone=no">
+            <meta name="Robots" content="ALL" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <title>생활관리사 맞춤 서비스</title>
+            <link rel="stylesheet" type="text/css" href="css/style.css">
+        </head>
+        
+        <body>
+            <h1 id="title">생활관리사 맞춤 서비스</h1>
+        
+        
+            <div id="wrap">
+                <div id="gnb">
+                    <h2 id="gnb-title">관리사 업무 현황</h2>
+                    <button id="gnb-menu"><span>메뉴</span></button>
+                    <ul id="gnb-list">
+                        <li><a href="mypage_p1">마이페이지</a></li>
+                        <li><a href="/">로그아웃</a></li>
+                    </ul>
+                </div>
+                <div id="contents">
+                    <div id="inner">
+                        <div class="profile">
+                            <em class="profile-photo" style="background:url('../../img/profile_sample.jpg') no-repeat center center / cover"></em>
+                            <h5 class="mt5"><b>${req.session.sname}</b> 어르신</h5>
+                            <br>
+                        </div>
+                                <dl class="profile-list">
+                                    <dt><i class="fa fa-user" aria-hidden="true"></i>담당 관리사</dt>
+                                    <dd>${results[0].manName}</dd>
+                                </dl>        
+                        <div class="mypage-list mt20" style="text-align: center;">
+                            <dl>
+                               <dt style="font-size: 20px; border-bottom: 1px solid #ddd; padding: 5px 8px; text-align: left;">할 일 리스트</dt>
+                               <dd class="mt20" style="font-size: 16px; padding: 10px 5px;">${results[0].todo}</dd>
+                            </dl>
+                            <dl>
+                                <dt class="mt40" style="font-size: 20px; border-bottom: 1px solid #ddd; padding: 5px 8px; text-align: left;">메모</dt>
+                                <dd class="mt30" style="padding:30px; border: 1px solid #ddd; border-radius: 10px;">등록된 메모가 없습니다!</dd>
+                            </dl>
+                        </div>
+                    </div><!-- inner -->
+                </div><!-- content -->
+            </div><!-- wrap -->
+        
+        
+        
+        
+            <!-- JS -->
+            <script src="js/jquery-2.2.1.min.js"></script>
+            <script src="js/placeholders.min.js"></script>
+            <script src="js/common.js"></script>
+            <script>
+        
+            </script>
+        </body>
+        
+        </html>
+            `;
+            res.send(output);
+        } else {
+            let output=`
+            <!DOCTYPE HTML>
+        <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+        
+        <head>
+            <meta charset="utf-8">
+            <meta name="HandheldFriendly" content="True">
+            <meta name="MobileOptimized" content="320">
+            <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+            <meta name="mobile-web-app-capable" content="yes">
+            <meta name="apple-mobile-web-app-capable" content="yes">
+            <meta name="apple-mobile-web-app-status-bar-style" content="black">
+            <meta name="format-detection" content="telephone=no">
+            <meta name="Robots" content="ALL" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <title>생활관리사 맞춤 서비스</title>
+            <link rel="stylesheet" type="text/css" href="css/style.css">
+        </head>
+        
+        <body>
+            <h1 id="title">생활관리사 맞춤 서비스</h1>
+        
+        
+            <div id="wrap">
+                <div id="gnb">
+                    <h2 id="gnb-title">관리사 업무 현황</h2>
+                    <button id="gnb-menu"><span>메뉴</span></button>
+                    <ul id="gnb-list">
+                        <li><a href="mypage_p1">마이페이지</a></li>
+                        <li><a href="/">로그아웃</a></li>
+                    </ul>
+                </div>
+                <div id="contents">
+                    <div id="inner">
+                        <div class="profile">
+                            <em class="profile-photo" style="background:url('../../img/profile_sample.jpg') no-repeat center center / cover"></em>
+                            <h5 class="mt5"><b>${req.session.sname}</b> 어르신</h5>
+                            <br>
+                        </div>
+                                <dl class="profile-list">
+                                    <dt><i class="fa fa-user" aria-hidden="true"></i>담당 관리사</dt>
+                                    <dd>${results[0].manName}</dd>
+                                </dl>        
+                        <div class="mypage-list mt20" style="text-align: center;">
+                            <dl>
+                               <dt style="font-size: 20px; border-bottom: 1px solid #ddd; padding: 5px 8px; text-align: left;">할 일 리스트</dt>
+                               <dd class="mt20" style="font-size: 16px; padding: 10px 5px;">${results[0].todo}</dd>
+                            </dl>
+                            <dl>
+                                <dt class="mt40" style="font-size: 20px; border-bottom: 1px solid #ddd; padding: 5px 8px; text-align: left;">메모</dt>
+                                <dd class="mt30" style="padding:30px; border: 1px solid #ddd; border-radius: 10px;">${results[0].memo}</dd>
+                            </dl>
+                        </div>
+                    </div><!-- inner -->
+                </div><!-- content -->
+            </div><!-- wrap -->
+        
+        
+        
+        
+            <!-- JS -->
+            <script src="js/jquery-2.2.1.min.js"></script>
+            <script src="js/placeholders.min.js"></script>
+            <script src="js/common.js"></script>
+            <script>
+        
+            </script>
+        </body>
+        
+        </html>
+            `;
+            res.send(output);
+        }
+    });
 });
 
 //로그아웃(관리자)
