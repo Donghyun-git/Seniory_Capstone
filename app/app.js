@@ -1366,11 +1366,10 @@ app.get('/map1', function(req, res){
                         <h2 id="gnb-title">위치정보</h2>
                         <button id="gnb-menu"><span>메뉴</span></button>
                         <ul id="gnb-list">
-                            <li><a href="list">오늘업무</a></li>
-                            <li><a href="calender">종합업무</a></li>
-                            <li><a href="workshare">인수인계</a></li>
-                            <li><a href="manage">어르신 관리</a></li>
-                            <li><a href="mypage">마이페이지</a></li>
+                            <li><a href="list1">오늘업무</a></li>
+                            <li><a href="workshare1">인수인계</a></li>
+                            <li><a href="manage1">어르신 관리</a></li>
+                            <li><a href="mypage1">마이페이지</a></li>
                             <li><a href="/">로그아웃</a></li>
                         </ul>
                     </div>
@@ -1394,6 +1393,9 @@ app.get('/map1', function(req, res){
                 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=se5rcmbh22&submodules=geocoder"></script>
                 <script>
                     
+                        let markers = new Array();
+                        let infoWindows = new Array();
+
                     naver.maps.Service.fromAddrToCoord({ address: '${json1[i].info.padr}' }, function(status, response) {
                         if (status === naver.maps.Service.Status.ERROR) {
                             return alert('Something wrong!');
@@ -1408,6 +1410,32 @@ app.get('/map1', function(req, res){
                             position: new naver.maps.LatLng(response.result.items[0].point.y, response.result.items[0].point.x),
                             map: map
                         });
+
+                        var infoWindow = new naver.maps.InfoWindow({
+                            content: '<div style="width: 250px; text-align: center; padding:10px;"><b style="font-weight: 300; font-size: 18px;">' + '${json1[i].info.pname} '+ '${json1[i].info.page} '+ '${json1[i].info.sex}' + '<p style="font-size: 16px; font-weight: 400;">' + '${json1[i].info.padr}' + '</p>' + '</b></div>'
+                        });
+
+                        markers.push(marker);
+                        infoWindows.push(infoWindow);
+
+                        function getClickHandler(seq) {
+
+                            return function(e) {  // 마커를 클릭하는 부분
+                                var marker = markers[seq], // 클릭한 마커의 시퀀스로 찾는다.
+                                    infoWindow = infoWindows[seq]; // 클릭한 마커의 시퀀스로 찾는다
+                    
+                                if (infoWindow.getMap()) {
+                                    infoWindow.close();
+                                } else {
+                                    infoWindow.open(map, marker); // 표출
+                                }
+                            }
+                        }
+                    
+                    for (var i=0, j=markers.length; i<j; i++) {
+                        console.log(markers[i] , getClickHandler(i));
+                        naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i)); // 클릭한 마커 핸들러
+                    }
                     });
                     
 

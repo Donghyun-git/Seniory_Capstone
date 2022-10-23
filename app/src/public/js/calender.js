@@ -2,9 +2,10 @@ let date = new Date();
 
 let y = date.getFullYear();
 let m = date.getMonth();
-let d = date.getDay();
+let d = date.getDate();
 
-document.getElementById('dayTitle').textContent = `${y}년 ${m + 1}월 ${d + 16}일`;
+
+document.getElementById('dayTitle').textContent = `${y}년 ${m + 1}월 ${d}일`;
 
 const renderCalender = () => {
 const viewYear = date.getFullYear();
