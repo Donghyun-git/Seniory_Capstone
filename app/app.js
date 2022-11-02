@@ -74,7 +74,6 @@ app.post("/",encoder, async function(req, res){
     const id = req.body.id;
     const pw = req.body.pw;
     const info = [];
-    const shareInfo = [];
 
     connection.query('select center, id, pw, name from user where center = ? and id = ? and pw = ?;',[center, id, pw], function(error, results, fields) {
         if(results.length == 0){
@@ -1650,7 +1649,6 @@ app.get('/map1', function(req, res){
                         }
                     
                     for (var i=0, j=markers.length; i<j; i++) {
-                        console.log(markers[i] , getClickHandler(i));
                         naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i)); // 클릭한 마커 핸들러
                     }
                     });
