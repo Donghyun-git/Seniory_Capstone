@@ -1742,7 +1742,7 @@ app.get('/mypage1', function(req, res){
                                 </dl>        
                         <div class="mypage-list">
                             <ul>
-                               <li><a href="/modify1">회원정보수정</a></li>
+                               <li><a href="#">회원정보수정</a></li>
                                <li><a href="/deletelist1">인수인계 리스트 삭제</a></li>
                                <li><a href="#">설정</a></li>
                                <li><a href="/">로그아웃</a></li>
@@ -2060,7 +2060,7 @@ app.get("/mypage_p1", function(req, res){
                                 </dl>        
                         <div class="mypage-list">
                             <ul>
-                               <li><a href="modify_p1">회원정보수정</a></li>
+                               <li><a href="#">회원정보수정</a></li>
                                <li><a href="/detail_info1">관리사 업무 현황</a></li>
                                <li><a href="#">설정</a></li>
                                <li><a href="/">로그아웃</a></li>
